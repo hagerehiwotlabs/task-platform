@@ -1,0 +1,43 @@
+{
+  "name": "@hagerehiwotlabs/contracts",
+  "version": "1.0.0",
+  "description": "API contracts and shared types for HagereHiwotLabs Task Platform",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./openapi": "./src/openapi.yaml"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "generate": "node scripts/generate-types.js",
+    "validate": "npm run validate:openapi && npm run validate:changes",
+    "validate:openapi": "npx @redocly/cli lint src/openapi.yaml",
+    "validate:changes": "node scripts/validate-changes.js",
+    "version-check": "node scripts/check-version.js",
+    "mock": "npx prism mock src/openapi.yaml --port 4010",
+    "lint": "eslint src --ext .ts",
+    "type-check": "tsc --noEmit",
+    "release": "npm run version-check && npm run validate && npm run generate && npm run build",
+    "prepublishOnly": "npm run release"
+  },
+  "devDependencies": {
+    "@redocly/cli": "2.16.0",
+    "@stoplight/prism-cli": "5.14.2",
+    "@types/node": "^25.2.2",
+    "openapi-typescript": "^7.10.1",
+    "semver": "^7.7.4",
+    "typescript": "^5.9.3"
+  },
+  "peerDependencies": {
+    "zod": "^4.3.6"
+  }
+}
