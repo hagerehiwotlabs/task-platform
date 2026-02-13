@@ -1,7 +1,7 @@
 {
   "name": "@hagerehiwotlabs/contracts",
   "version": "1.0.0",
-  "description": "API contracts and shared types for HagereHiwotLabs Task Platform",
+  "description": "API contracts and shared types for Hagere Hiwot Labs Task Platform",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {

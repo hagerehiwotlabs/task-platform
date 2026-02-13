@@ -1,6 +1,6 @@
-# HagereHiwotLabs Task Platform Documentation
+# Hagere Hiwot Labs Task Platform Documentation
 
-Welcome to the official documentation for the HagereHiwotLabs Task Platform. This documentation is version-controlled and treated as code.
+Welcome to the official documentation for the Hagere Hiwot Labs Task Platform. This documentation is version-controlled and treated as code.
 
 ## 📚 Quick Navigation
 
@@ -25,7 +25,7 @@ Welcome to the official documentation for the HagereHiwotLabs Task Platform. Thi
 - Single source of truth
 
 ### Quick Links
-- [View source code](https://github.com/HagereHiwotLabs/hagerehiwotlabs-task-platform)
+- [View source code](https://github.com/Hagere Hiwot Labs/hagerehiwotlabs-task-platform)
 - [Team Telegram](https://t.me/hagerehiwotlabs-team)
 
 ---

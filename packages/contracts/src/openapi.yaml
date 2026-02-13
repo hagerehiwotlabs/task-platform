@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: HagereHiwotLabs Task Platform API
+  title: Hagere Hiwot Labs Task Platform API
   version: 1.0.0
   description: |
     Professional task management API with full TypeScript support.
@@ -18,7 +18,7 @@ info:
     All errors follow the ErrorResponse schema with consistent structure.
     
   contact:
-    name: HagereHiwotLabs Team
+    name: Hagere Hiwot Labs Team
     email: team@hagerehiwotlabs.dev
   license:
     name: MIT

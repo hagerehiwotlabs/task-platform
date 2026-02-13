@@ -1,4 +1,4 @@
-# HagereHiwotLabs Task Platform — Team Rules
+# Hagere Hiwot Labs Task Platform — Team Rules
 
 ## 🎯 Core Values (Non-Negotiable)
 

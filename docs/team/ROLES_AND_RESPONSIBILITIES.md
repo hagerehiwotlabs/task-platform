@@ -1,4 +1,4 @@
-# HagereHiwotLabs Task Platform — Roles and Responsibilities
+# Hagere Hiwot Labs Task Platform — Roles and Responsibilities
 
 ## 🎯 Purpose
 

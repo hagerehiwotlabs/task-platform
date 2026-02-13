@@ -1,7 +1,7 @@
-# HagereHiwotLabs Task Platform - Architecture Documentation
+# Hagere Hiwot Labs Task Platform - Architecture Documentation
 
 ## 📖 Overview
-This directory contains comprehensive documentation about the architecture, design decisions, and technical specifications of the HagereHiwotLabs Task Platform.
+This directory contains comprehensive documentation about the architecture, design decisions, and technical specifications of the Hagere Hiwot Labs Task Platform.
 
 ## 📁 Structure
 ```

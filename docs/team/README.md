@@ -1,6 +1,6 @@
-# HagereHiwotLabs Task Platform — Team Documentation
+# Hagere Hiwot Labs Task Platform — Team Documentation
 
-Welcome to the HagereHiwotLabs team documentation. This section contains all team processes, standards, and collaboration guidelines.
+Welcome to the Hagere Hiwot Labs team documentation. This section contains all team processes, standards, and collaboration guidelines.
 
 ## 🎯 Core Principles
 

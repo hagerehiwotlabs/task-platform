@@ -1,8 +1,8 @@
-# HagereHiwotLabs Task Platform — Git Workflow Standards
+# Hagere Hiwot Labs Task Platform — Git Workflow Standards
 
 ## 🎯 Purpose
 
-This document defines the Git workflow standards for the HagereHiwotLabs Task Platform. Consistent Git practices enable efficient collaboration, clear history, and reliable deployments.
+This document defines the Git workflow standards for the Hagere Hiwot Labs Task Platform. Consistent Git practices enable efficient collaboration, clear history, and reliable deployments.
 
 ## 📁 Repository Structure
 
