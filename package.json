@@ -1,7 +1,7 @@
 {
   "name": "hagerehiwotlabs-task-platform",
   "private": true,
-  "description": "Professional task management platform for HagereHiwotLabs - Production Ready",
+  "description": "Professional task management platform for Hagere Hiwot Labs - Production Ready",
   "version": "0.1.0",
   "workspaces": [
     "apps/*",
@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
     "dev:frontend": "npm run dev --workspace=apps/frontend",
-    "dev:backend": "npm run start:dev --workspace=apps/backend",
+    "dev:backend": "npm run start:dev --workspace=apps/backend && npm run prisma:generate --workspace=apps/backend",
     "build": "turbo run build",
     "build:ci": "turbo run build",
     "test": "turbo run test",
@@ -27,7 +27,7 @@
     "docker:logs": "docker compose logs -f",
     "docker:prod": "docker compose -f docker-compose.prod.yml up -d",
     "setup": "npm install && npm run docker:up && npm run db:setup",
-    "db:setup": "npm run prisma:generate --workspace=apps/backend && npm run prisma:migrate --workspace=apps/backend && npm run prisma:seed --workspace=apps/backend",
+    "db:setup": "npm run prisma:generate --workspace=apps/backend && env-cmd -f .env npm run prisma:migrate --workspace=apps/backend && env-cmd -f .env npm run prisma:seed --workspace=apps/backend",
     "db:migrate": "npm run prisma:migrate --workspace=apps/backend",
     "db:reset": "npm run prisma:reset --workspace=apps/backend",
     "db:seed": "npm run prisma:seed --workspace=apps/backend",
@@ -46,6 +46,7 @@
     "@typescript-eslint/eslint-plugin": "^8.54.0",
     "@typescript-eslint/parser": "^8.54.0",
     "concurrently": "^9.2.1",
+    "env-cmd": "11.0.0",
     "eslint": "^10.0.0",
     "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",

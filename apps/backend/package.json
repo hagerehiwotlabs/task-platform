@@ -1,7 +1,7 @@
 {
   "name": "@hagerehiwotlabs/backend",
   "version": "0.1.0",
-  "description": "HagereHiwotLabs Task Platform Backend API",
+  "description": "Hagere Hiwot Labs Task Platform Backend API",
   "scripts": {
     "build": "nest build",
     "start": "nest start",
@@ -10,7 +10,7 @@
     "test": "vitest run",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:seed": "tsx prisma/seed.ts"
+    "prisma:seed": "env-cmd -f .env tsx prisma/seed.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.1.13",
@@ -49,6 +49,7 @@
     "@types/node": "^25.2.2",
     "@typescript-eslint/eslint-plugin": "^8.54.0",
     "@typescript-eslint/parser": "^8.54.0",
+    "dotenv": "17.2.3",
     "eslint": "^10.0.0",
     "prisma": "^7.3.0",
     "tsx": "^4.21.0",
