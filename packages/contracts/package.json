@@ -30,12 +30,14 @@
     "prepublishOnly": "npm run release"
   },
   "devDependencies": {
+    "@eslint/js": "10.0.1",
     "@redocly/cli": "2.16.0",
     "@stoplight/prism-cli": "5.14.2",
     "@types/node": "^25.2.2",
     "openapi-typescript": "^7.10.1",
     "semver": "^7.7.4",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "8.55.0"
   },
   "peerDependencies": {
     "zod": "^4.3.6"
