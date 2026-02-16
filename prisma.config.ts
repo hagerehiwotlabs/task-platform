@@ -1,5 +1,5 @@
-import 'dotenv/config'
-import { defineConfig, env } from 'prisma/config'
+import 'dotenv/config';
+import { defineConfig, env } from 'prisma/config';
 
 export default defineConfig({
   // Points to your schema file relative to this config
@@ -12,4 +12,4 @@ export default defineConfig({
     // The database URL is now configured here
     url: env('DATABASE_URL'),
   },
-})
+});

@@ -8,16 +8,16 @@ services:
       POSTGRES_DB: hagerehiwotlabs_task
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256"
+      POSTGRES_INITDB_ARGS: '--auth-host=scram-sha-256'
     ports:
-      - "5432:5432"
+      - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - hagerehiwotlabs-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -32,14 +32,14 @@ services:
     container_name: hagerehiwotlabs-redis
     command: redis-server --appendonly yes --requirepass redispass
     ports:
-      - "6379:6379"
+      - '6379:6379'
     volumes:
       - redis_data:/data
     networks:
       - hagerehiwotlabs-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      test: ['CMD', 'redis-cli', '--raw', 'incr', 'ping']
       interval: 10s
       timeout: 5s
       retries: 3
@@ -51,7 +51,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@hagerehiwotlabs.dev
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
-      - "5050:80"
+      - '5050:80'
     depends_on:
       postgres:
         condition: service_healthy
@@ -68,7 +68,7 @@ services:
       REDIS_PORT: 6379
       REDIS_PASSWORD: redispass
     ports:
-      - "8081:8081"
+      - '8081:8081'
     depends_on:
       - redis
     networks:

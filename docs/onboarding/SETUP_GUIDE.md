@@ -3,6 +3,7 @@
 ## 🚀 Quick Start (5 Minutes)
 
 ### Prerequisites Check
+
 ```bash
 # Verify you have required tools
 git --version          # Should be 2.x+
@@ -13,6 +14,7 @@ docker compose version # Should be 2.x+
 ```
 
 ### One-Command Setup
+
 ```bash
 # 1. Clone the repository
 git clone https://github.com/Hagere Hiwot Labs/hagerehiwotlabs-task-platform.git
@@ -26,6 +28,7 @@ cd hagerehiwotlabs-task-platform
 
 > **Note**
 > Most setup steps are one-time only. Day-to-day development typically involves:
+>
 > - Pulling latest changes
 > - Running `npm install` if dependencies change
 > - Starting services with `npm run docker:up` and `npm run dev`
@@ -35,6 +38,7 @@ cd hagerehiwotlabs-task-platform
 ### Step 1: Install Prerequisites
 
 #### macOS
+
 ```bash
 # Install Homebrew (if not installed)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -51,6 +55,7 @@ volta install node@20 npm@10
 ```
 
 #### Windows
+
 1. **Git**: Download from [git-scm.com](https://git-scm.com/download/win)
 2. **Node.js**: Download LTS version from [nodejs.org](https://nodejs.org)
 3. **Docker Desktop**: Download from [docker.com](https://docker.com)
@@ -58,6 +63,7 @@ volta install node@20 npm@10
 5. **VS Code**: Download from [code.visualstudio.com](https://code.visualstudio.com)
 
 #### Linux (Ubuntu/Debian)
+
 ```bash
 # Update package list
 sudo apt-get update
@@ -82,8 +88,9 @@ sudo apt install gh -y
 ```
 
 ### Step 2: Clone Repository
+
 ```bash
-# Clone with HTTPS 
+# Clone with HTTPS
 git clone https://github.com/Hagere Hiwot Labs/hagerehiwotlabs-task-platform.git
 
 # Navigate to project
@@ -95,6 +102,7 @@ ls -la
 ```
 
 ### Step 3: Install Dependencies
+
 ```bash
 # Install root dependencies
 npm install
@@ -106,6 +114,7 @@ npm install
 ```
 
 ### Step 4: Start Development Services
+
 ```bash
 # Start database, Redis, and management UIs
 npm run docker:up
@@ -117,6 +126,7 @@ docker compose ps
 ```
 
 ### Step 5: Setup Database
+
 ```bash
 # Generate Prisma client
 npm run prisma:generate --workspace=apps/backend
@@ -133,6 +143,7 @@ npm run prisma:studio --workspace=apps/backend
 ```
 
 ### Step 6: Build Shared Packages
+
 ```bash
 # Build contracts package
 npm run build --workspace=packages/contracts
@@ -146,6 +157,7 @@ ls packages/contracts/src/generated/types.ts
 ```
 
 ### Step 7: Start Development
+
 ```bash
 # Start both frontend and backend
 npm run dev
@@ -158,6 +170,7 @@ npm run dev:backend   # Backend only (http://localhost:3000)
 ## 🎯 Verification Steps
 
 ### Verify Everything is Working
+
 ```bash
 # 1. Check services are running
 docker compose ps
@@ -185,19 +198,22 @@ npm run type-check
 ```
 
 ### Expected URLs After Setup
-| Service | URL | What to Expect |
-|---------|-----|----------------|
-| Frontend | http://localhost:5173 | React application with login screen |
-| Backend API | http://localhost:3000 | NestJS API server |
-| API Documentation | http://localhost:3000/api/docs | Interactive Swagger UI |
-| Health Check | http://localhost:3000/api/v1/health | JSON health status |
-| PostgreSQL | localhost:5432 | Database server |
-| pgAdmin | http://localhost:5050 | Database management UI |
-| Redis | localhost:6379 | Redis cache server |
-| Redis Commander | http://localhost:8081 | Redis management UI |
+
+| Service           | URL                                 | What to Expect                      |
+| ----------------- | ----------------------------------- | ----------------------------------- |
+| Frontend          | http://localhost:5173               | React application with login screen |
+| Backend API       | http://localhost:3000               | NestJS API server                   |
+| API Documentation | http://localhost:3000/api/docs      | Interactive Swagger UI              |
+| Health Check      | http://localhost:3000/api/v1/health | JSON health status                  |
+| PostgreSQL        | localhost:5432                      | Database server                     |
+| pgAdmin           | http://localhost:5050               | Database management UI              |
+| Redis             | localhost:6379                      | Redis cache server                  |
+| Redis Commander   | http://localhost:8081               | Redis management UI                 |
 
 ### Test Credentials
+
 After seeding (in development only) you can login with:
+
 - **Email**: `test@hagerehiwotlabs.dev`
 - **Password**: `SecurePass123!`
 
@@ -206,6 +222,7 @@ After seeding (in development only) you can login with:
 ### Common Issues and Solutions
 
 #### Issue: Docker not starting
+
 ```bash
 # Check Docker Desktop is running
 # On macOS: Check Docker icon in menu bar
@@ -221,6 +238,7 @@ docker ps
 ```
 
 #### Issue: Port already in use
+
 ```bash
 # Check what's using the port
 # Port 5432 (PostgreSQL)
@@ -240,6 +258,7 @@ kill -9 <PID>
 ```
 
 #### Issue: Database connection failed
+
 ```bash
 # Check PostgreSQL is running
 docker compose ps | grep postgres
@@ -256,6 +275,7 @@ docker compose exec postgres psql -U postgres -d hagerehiwotlabs_task -c "SELECT
 ```
 
 #### Issue: Node/npm version mismatch
+
 ```bash
 # Check Node version
 node --version
@@ -275,6 +295,7 @@ nvm use 20
 ```
 
 #### Issue: TypeScript errors after clone
+
 ```bash
 # Clean and reinstall
 npm run clean
@@ -289,6 +310,7 @@ npm run build --workspace=packages/ui
 ```
 
 #### Issue: Git hooks not working
+
 ```bash
 # Install husky hooks
 npm run prepare
@@ -305,6 +327,7 @@ git commit -m "Test commit"
 ### Platform-Specific Issues
 
 #### macOS Specific
+
 ```bash
 # If you get "Permission denied" for Docker
 sudo chmod 666 /var/run/docker.sock
@@ -315,6 +338,7 @@ ulimit -n 65536
 ```
 
 #### Windows Specific
+
 1. **WSL 2 required**: Docker Desktop requires WSL 2
 2. **Line endings**: Configure Git for LF line endings
    ```bash
@@ -327,6 +351,7 @@ ulimit -n 65536
    ```
 
 #### Linux Specific
+
 ```bash
 # Docker permissions
 sudo usermod -aG docker $USER
@@ -340,9 +365,11 @@ sudo sysctl -p
 ## 🔐 Environment Configuration
 
 ### Required Environment Variables
+
 Create `.env` files based on examples:
 
 #### Backend (.env)
+
 ```bash
 # Copy example
 cp apps/backend/.env.example apps/backend/.env
@@ -352,6 +379,7 @@ code apps/backend/.env
 ```
 
 #### Frontend (.env)
+
 ```bash
 # Copy example
 cp apps/frontend/.env.example apps/frontend/.env
@@ -360,20 +388,23 @@ cp apps/frontend/.env.example apps/frontend/.env
 ```
 
 ### Important Variables
-| Variable | Purpose | Development Value |
-|----------|---------|-------------------|
+
+| Variable       | Purpose               | Development Value                                                    |
+| -------------- | --------------------- | -------------------------------------------------------------------- |
 | `DATABASE_URL` | PostgreSQL connection | `postgresql://postgres:postgres@localhost:5432/hagerehiwotlabs_task` |
-| `JWT_SECRET` | JWT signing key | `development-secret-change-in-production` |
-| `REDIS_HOST` | Redis host | `localhost` |
-| `REDIS_PORT` | Redis port | `6379` |
-| `CORS_ORIGIN` | Allowed origins | `http://localhost:5173` |
-| `NODE_ENV` | Environment | `development` |
+| `JWT_SECRET`   | JWT signing key       | `development-secret-change-in-production`                            |
+| `REDIS_HOST`   | Redis host            | `localhost`                                                          |
+| `REDIS_PORT`   | Redis port            | `6379`                                                               |
+| `CORS_ORIGIN`  | Allowed origins       | `http://localhost:5173`                                              |
+| `NODE_ENV`     | Environment           | `development`                                                        |
 
 ## 🛠️ Development Tools Setup
 
 ### VS Code (Recommended)
+
 1. **Install VS Code**: [Download here](https://code.visualstudio.com/)
 2. **Install extensions**:
+
    ```bash
    # Essential extensions
    code --install-extension dbaeumer.vscode-eslint
@@ -382,7 +413,7 @@ cp apps/frontend/.env.example apps/frontend/.env
    code --install-extension bradlc.vscode-tailwindcss
    code --install-extension eamodio.gitlens
    code --install-extension ms-azuretools.vscode-docker
-   
+
    # Optional but helpful
    code --install-extension formulahendry.auto-rename-tag
    code --install-extension streetsidesoftware.code-spell-checker
@@ -396,31 +427,28 @@ cp apps/frontend/.env.example apps/frontend/.env
      "editor.codeActionsOnSave": {
        "source.fixAll.eslint": true
      },
-     "eslint.validate": [
-       "javascript",
-       "javascriptreact",
-       "typescript",
-       "typescriptreact"
-     ],
+     "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
      "typescript.preferences.importModuleSpecifier": "relative"
    }
    ```
 
 ### Other Editors
+
 - **WebStorm**: Excellent TypeScript/React support
 - **Neovim/Vim**: Custom configuration available
 - **Sublime Text**: With appropriate plugins
 
 ### Browser Extensions
+
 1. **React Developer Tools**: React debugging
 2. **Redux DevTools**: State management debugging
 3. **JSON Formatter**: Better JSON viewing
 4. **Reactime**: React performance profiling
 
-
 ## 🔄 Update Instructions
 
 ### Updating from Previous Version
+
 ```bash
 # Pull latest changes
 git pull origin main
@@ -442,6 +470,7 @@ npm run build --workspaces
 ```
 
 ### Regular Maintenance
+
 ```bash
 # Weekly: Update dependencies
 npm update
@@ -457,6 +486,7 @@ docker system prune -a
 ## 🧪 Testing Your Setup
 
 ### Comprehensive Test
+
 ```bash
 #!/bin/bash
 echo "🔍 Running comprehensive setup test..."
@@ -495,6 +525,7 @@ echo "🎉 All tests passed! Setup is complete and working correctly."
 ```
 
 ### Quick Health Check
+
 ```bash
 # One-line health check
 curl -f http://localhost:3000/api/v1/health && \
@@ -506,12 +537,14 @@ curl -f http://localhost:3000/api/v1/health && \
 ## 📞 Getting Help
 
 ### When to Ask for Help
+
 - **Setup takes >30 minutes**: Ask in #tech-help
 - **Error messages you don't understand**: Screenshot and ask
 - **Missing dependencies**: Check this guide first, then ask
 - **Platform-specific issues**: Mention your OS
 
 ### What Information to Provide
+
 ```bash
 # When asking for help, provide:
 1. Your operating system and version
@@ -526,6 +559,7 @@ curl -f http://localhost:3000/api/v1/health && \
 ```
 
 ### Support Channels
+
 1. **#tech-help**: Technical setup issues
 2. **#general**: General questions
 3. **Team lead**: If stuck for >1 hour
@@ -534,6 +568,7 @@ curl -f http://localhost:3000/api/v1/health && \
 ## 🎓 Next Steps After Setup
 
 ### 1. Explore the Application
+
 ```bash
 # 1. Open frontend
 open http://localhost:5173
@@ -550,6 +585,7 @@ npm run prisma:studio --workspace=apps/backend
 ```
 
 ### 2. Make Your First Change
+
 ```bash
 # 1. Create a branch
 git checkout -b docs/update-readme-$(whoami)
@@ -567,6 +603,7 @@ gh pr create --title "docs: Update README" --body "Updated README with..."
 ```
 
 ### 3. Learn the Codebase
+
 ```bash
 # 1. Explore architecture
 code docs/architecture/README.md
@@ -586,6 +623,7 @@ code docs/team/TEAM_RULES.md
 ---
 
 ## 🔗 Quick Reference Commands
+
 ```bash
 # Setup
 ./scripts/setup.sh                    # Complete setup
@@ -613,7 +651,5 @@ docker system prune -a                # Clean Docker
 
 ## 📅 Version History
 
-* **Version**: 1.0
-* **Last Updated**: 2026-02-10
-
-
+- **Version**: 1.0
+- **Last Updated**: 2026-02-10

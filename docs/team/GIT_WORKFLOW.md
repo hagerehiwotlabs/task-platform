@@ -7,6 +7,7 @@ This document defines the Git workflow standards for the Hagere Hiwot Labs Task 
 ## 📁 Repository Structure
 
 ### Branches
+
 ```
 main
 ├── develop
@@ -19,16 +20,18 @@ main
 ```
 
 ### Protected Branches
-| Branch | Protection | Merge Requirements |
-|--------|------------|-------------------|
-| `main` | Full | - 2 approvals<br>- All checks pass<br>- Squash merge only |
-| `develop` | Partial | - 1 approval<br>- All checks pass<br>- Squash merge only |
+
+| Branch    | Protection | Merge Requirements                                        |
+| --------- | ---------- | --------------------------------------------------------- |
+| `main`    | Full       | - 2 approvals<br>- All checks pass<br>- Squash merge only |
+| `develop` | Partial    | - 1 approval<br>- All checks pass<br>- Squash merge only  |
 
 ## 🌿 Branch Strategy
 
 ### Branch Types
 
 #### Feature Branches (`feature/*`)
+
 ```bash
 # Format: feature/description-initials
 feature/add-dark-mode-jd
@@ -42,6 +45,7 @@ feature/user-profile-avatar-ms
 **Naming**: Lowercase, hyphens, include initials
 
 #### Bugfix Branches (`bugfix/*`)
+
 ```bash
 # Format: bugfix/description-initials
 bugfix/login-error-500-jd
@@ -54,6 +58,7 @@ bugfix/mobile-layout-ms
 **Lifespan**: 3 days maximum
 
 #### Hotfix Branches (`hotfix/*`)
+
 ```bash
 # Format: hotfix/description-initials
 hotfix/production-auth-bug-jd
@@ -66,6 +71,7 @@ hotfix/production-auth-bug-jd
 **Process**: Emergency process only
 
 #### Chore Branches (`chore/*`)
+
 ```bash
 # Format: chore/description-initials
 chore/update-dependencies-jd
@@ -78,6 +84,7 @@ chore/ci-configuration-ms
 **Lifespan**: 3 days maximum
 
 #### Documentation Branches (`docs/*`)
+
 ```bash
 # Format: docs/description-initials
 docs/update-readme-jd
@@ -92,6 +99,7 @@ docs/api-documentation-ms
 ### Branch Creation Rules
 
 1. **Always start from target branch**
+
    ```bash
    git checkout develop
    git pull origin develop
@@ -110,17 +118,19 @@ docs/api-documentation-ms
    - Stale branches auto-deleted
 
 4. **Regular updates**
+
    ```bash
    # Rebase on develop regularly
    git fetch origin
    git rebase origin/develop
-   
+
    # Resolve conflicts early
    ```
 
 ## 💾 Commit Standards
 
 ### Commit Message Format
+
 ```
 type(scope): subject
 
@@ -130,44 +140,50 @@ footer
 ```
 
 ### Type (Required)
-| Type | Description | Example |
-|------|-------------|---------|
-| `feat` | A new feature | `feat(auth): add refresh tokens` |
-| `fix` | A bug fix | `fix(api): handle null response` |
-| `docs` | Documentation only | `docs(readme): update setup instructions` |
-| `style` | Formatting, missing semi colons, etc | `style(ui): fix button padding` |
-| `refactor` | Code change that neither fixes bug nor adds feature | `refactor(api): extract validation logic` |
-| `perf` | Performance improvement | `perf(db): add query indexes` |
-| `test` | Adding missing tests | `test(auth): add login tests` |
-| `chore` | Maintenance tasks | `chore(deps): update packages` |
-| `ci` | CI/CD changes | `ci(github): add coverage check` |
-| `build` | Build system changes | `build(webpack): update configuration` |
-| `revert` | Revert a previous commit | `revert: "feat(auth): add refresh tokens"` |
+
+| Type       | Description                                         | Example                                    |
+| ---------- | --------------------------------------------------- | ------------------------------------------ |
+| `feat`     | A new feature                                       | `feat(auth): add refresh tokens`           |
+| `fix`      | A bug fix                                           | `fix(api): handle null response`           |
+| `docs`     | Documentation only                                  | `docs(readme): update setup instructions`  |
+| `style`    | Formatting, missing semi colons, etc                | `style(ui): fix button padding`            |
+| `refactor` | Code change that neither fixes bug nor adds feature | `refactor(api): extract validation logic`  |
+| `perf`     | Performance improvement                             | `perf(db): add query indexes`              |
+| `test`     | Adding missing tests                                | `test(auth): add login tests`              |
+| `chore`    | Maintenance tasks                                   | `chore(deps): update packages`             |
+| `ci`       | CI/CD changes                                       | `ci(github): add coverage check`           |
+| `build`    | Build system changes                                | `build(webpack): update configuration`     |
+| `revert`   | Revert a previous commit                            | `revert: "feat(auth): add refresh tokens"` |
 
 ### Scope (Optional)
+
 - Package or module name
 - Keep it concise
 - Use lowercase
 - Examples: `auth`, `ui`, `api`, `db`
 
 ### Subject (Required)
+
 - 50 characters maximum
 - Use imperative mood ("add" not "added")
 - Don't capitalize first letter
 - No period at the end
 
 ### Body (Optional)
+
 - Wrap at 72 characters
 - Explain what and why vs. how
 - Use bullet points if needed
 - Reference issues using #
 
 ### Footer (Optional)
+
 - Reference GitHub issues
 - Breaking changes notice
 - Migration instructions
 
 ### Examples
+
 ```bash
 # Good
 git commit -m "feat(auth): add password reset flow
@@ -190,6 +206,7 @@ git commit -m "feat: did things"  # Missing scope, vague
 ## 🔀 Pull Request Process
 
 ### PR Creation Checklist
+
 - [ ] Branch name follows convention
 - [ ] PR title follows commit format
 - [ ] Description includes what/why/how
@@ -201,23 +218,29 @@ git commit -m "feat: did things"  # Missing scope, vague
 - [ ] Documentation updated
 
 ### PR Description Template
+
 ```markdown
 ## What does this PR do?
+
 Brief description of changes.
 
 ## Why is this change needed?
+
 Problem being solved or feature being added.
 
 ## How was it tested?
+
 - [ ] Unit tests added
 - [ ] Integration tests updated
 - [ ] Manual testing performed
 - [ ] Edge cases considered
 
 ## Screenshots (if applicable)
+
 Add before/after screenshots for UI changes.
 
 ## Checklist
+
 - [ ] My code follows the style guidelines
 - [ ] I have performed a self-review of my code
 - [ ] I have commented my code, particularly in hard-to-understand areas
@@ -227,23 +250,26 @@ Add before/after screenshots for UI changes.
 - [ ] New and existing unit tests pass locally with my changes
 
 ## Related Issues
+
 Closes #123
 Fixes #456
 ```
 
 ### PR Size Guidelines
-| Type | Ideal Size | Maximum |
-|------|------------|---------|
-| Feature | 200-500 lines | 1000 lines |
-| Bugfix | 50-200 lines | 500 lines |
-| Refactor | 100-400 lines | 800 lines |
-| Documentation | N/A | N/A |
+
+| Type          | Ideal Size    | Maximum    |
+| ------------- | ------------- | ---------- |
+| Feature       | 200-500 lines | 1000 lines |
+| Bugfix        | 50-200 lines  | 500 lines  |
+| Refactor      | 100-400 lines | 800 lines  |
+| Documentation | N/A           | N/A        |
 
 **Rule**: If PR > 1000 lines, split into multiple PRs
 
 ## 👁️ Code Review Process
 
 ### Review Assignment
+
 1. **Author**: Creates PR, assigns 2 reviewers
 2. **Reviewers**: Selected based on expertise
 3. **Timeline**: Respond within 24 hours
@@ -252,6 +278,7 @@ Fixes #456
 ### Review Guidelines
 
 #### Do's
+
 - "Consider extracting this into a helper function"
 - "This might have an edge case when X happens"
 - "Tests are missing for this scenario"
@@ -260,6 +287,7 @@ Fixes #456
 - "Security consideration: [specific concern]"
 
 #### Don'ts
+
 - "This code is bad/wrong" (be specific)
 - Sarcasm or dismissive language
 - Blocking for personal preference
@@ -267,14 +295,16 @@ Fixes #456
 - "You should have done it this way" (without explanation)
 
 ### Review Labels
-| Label | Meaning | Action |
-|-------|---------|--------|
-| `approved` | Ready to merge | Merge when CI passes |
-| `changes-requested` | Needs changes | Author must address |
-| `comment` | Non-blocking feedback | Author may address |
-| `needs-discussion` | Requires team discussion | Schedule discussion |
+
+| Label               | Meaning                  | Action               |
+| ------------------- | ------------------------ | -------------------- |
+| `approved`          | Ready to merge           | Merge when CI passes |
+| `changes-requested` | Needs changes            | Author must address  |
+| `comment`           | Non-blocking feedback    | Author may address   |
+| `needs-discussion`  | Requires team discussion | Schedule discussion  |
 
 ### Review Checklist
+
 - [ ] Code solves the stated problem
 - [ ] Tests are adequate and pass
 - [ ] Documentation updated
@@ -289,7 +319,9 @@ Fixes #456
 ## 🚀 Merge Process
 
 ### After Approval
+
 1. **Author addresses feedback**
+
    ```bash
    # Make requested changes
    git add .
@@ -298,6 +330,7 @@ Fixes #456
    ```
 
 2. **Squash commits** (if multiple)
+
    ```bash
    # Interactive rebase
    git rebase -i origin/develop
@@ -305,6 +338,7 @@ Fixes #456
    ```
 
 3. **Update branch** (if needed)
+
    ```bash
    git fetch origin
    git rebase origin/develop
@@ -324,24 +358,28 @@ Fixes #456
    ```
 
 ### Merge Strategies
-| Branch Type | Merge Strategy | Notes |
-|-------------|----------------|-------|
-| `feature/*` | Squash and merge | Creates single commit |
-| `bugfix/*` | Squash and merge | Creates single commit |
-| `hotfix/*` | Rebase and merge | Preserves individual commits |
-| `chore/*` | Squash and merge | Creates single commit |
-| `docs/*` | Squash and merge | Creates single commit |
+
+| Branch Type | Merge Strategy   | Notes                        |
+| ----------- | ---------------- | ---------------------------- |
+| `feature/*` | Squash and merge | Creates single commit        |
+| `bugfix/*`  | Squash and merge | Creates single commit        |
+| `hotfix/*`  | Rebase and merge | Preserves individual commits |
+| `chore/*`   | Squash and merge | Creates single commit        |
+| `docs/*`    | Squash and merge | Creates single commit        |
 
 ## 🔄 Hotfix Process
 
 ### When to Create Hotfix
+
 - Production is down
 - Critical security vulnerability
 - Data loss or corruption
 - Legal/compliance issue
 
 ### Hotfix Steps
+
 1. **Create from main**
+
    ```bash
    git checkout main
    git pull origin main
@@ -354,12 +392,14 @@ Fixes #456
    - Document the fix
 
 3. **Test thoroughly**
+
    ```bash
    npm run test
    npm run build
    ```
 
 4. **Merge to main**
+
    ```bash
    # Get approval from team lead
    git checkout main
@@ -369,6 +409,7 @@ Fixes #456
    ```
 
 5. **Merge to develop**
+
    ```bash
    git checkout develop
    git merge main
@@ -384,6 +425,7 @@ Fixes #456
 ## 🛠️ Git Configuration
 
 ### Recommended .gitconfig
+
 ```ini
 [user]
     name = Your Name
@@ -413,6 +455,7 @@ Fixes #456
 ```
 
 ### Pre-commit Hooks
+
 ```bash
 # Install Husky hooks
 npm run prepare
@@ -426,6 +469,7 @@ npm run prepare
 ## 🧹 Cleanup & Maintenance
 
 ### Daily Cleanup
+
 ```bash
 # Delete merged branches
 git branch --merged develop | grep -v "develop" | grep -v "main" | xargs git branch -d
@@ -435,6 +479,7 @@ git fetch --prune
 ```
 
 ### Weekly Cleanup
+
 ```bash
 # List stale branches (30+ days)
 git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}'
@@ -444,6 +489,7 @@ git push origin --delete stale-branch
 ```
 
 ### Branch Hygiene Rules
+
 1. **Delete after merge**: Immediately after PR merge
 2. **Stale branches**: Auto-delete after 30 days
 3. **Naming conventions**: Enforced by CI
@@ -452,6 +498,7 @@ git push origin --delete stale-branch
 ## 🚨 Common Issues & Solutions
 
 ### Merge Conflicts
+
 ```bash
 # Rebase and resolve conflicts
 git fetch origin
@@ -466,6 +513,7 @@ git rebase --abort
 ```
 
 ### Accidentally Pushed to Main
+
 ```bash
 # Revert the commit
 git revert <commit-sha>
@@ -475,6 +523,7 @@ git push origin main --force-with-lease
 ```
 
 ### Lost Changes
+
 ```bash
 # Find lost commits
 git reflog
@@ -484,6 +533,7 @@ git cherry-pick <commit-sha>
 ```
 
 ### Wrong Branch
+
 ```bash
 # Stash changes
 git stash
@@ -498,26 +548,31 @@ git stash pop
 ## 📈 Best Practices
 
 ### Commit Often
+
 - Small, logical commits
 - Each commit should work independently
 - Easier to review and revert
 
 ### Write Good Messages
+
 - Follow conventional commits
 - Explain why, not just what
 - Reference issues
 
 ### Keep History Clean
+
 - Rebase instead of merge
 - Squash WIP commits
 - Remove temporary commits
 
 ### Collaborate Effectively
+
 - Communicate about conflicting work
 - Review each other's code regularly
 - Help with complex merges
 
 ### Use Git Features
+
 - `.gitignore` properly configured
 - Use hooks for quality
 - Tags for releases
@@ -526,12 +581,14 @@ git stash pop
 ## 🔧 Tools & Extensions
 
 ### Recommended Tools
+
 - **GitHub CLI**: `gh` for PR management
 - **GitLens**: VS Code extension
 - **SourceTree**: GUI for complex operations
 - **Tig**: Terminal UI for Git
 
 ### VS Code Settings
+
 ```json
 {
   "git.enableSmartCommit": true,
@@ -545,9 +602,7 @@ git stash pop
 ## 📚 Learning Resources
 
 ### Documentation
+
 - [Pro Git Book](https://git-scm.com/book/en/v2)
 - [GitHub Git Cheat Sheet](https://training.github.com/downloads/github-git-cheat-sheet/)
 - [Conventional Commits](https://www.conventionalcommits.org/)
-
-
-

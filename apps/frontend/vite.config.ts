@@ -1,6 +1,6 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from 'path'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
@@ -12,15 +12,15 @@ export default defineConfig({
         target: 'http://localhost:3000',
         changeOrigin: true,
         secure: false,
-      }
-    }
+      },
+    },
   },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
       '@contracts': path.resolve(__dirname, '../../packages/contracts/src'),
-      '@ui': path.resolve(__dirname, '../../packages/ui/src')
-    }
+      '@ui': path.resolve(__dirname, '../../packages/ui/src'),
+    },
   },
   build: {
     sourcemap: true,
@@ -30,10 +30,10 @@ export default defineConfig({
           vendor: ['react', 'react-dom', 'react-router-dom'],
           query: ['@tanstack/react-query'],
           forms: ['react-hook-form', 'zod', '@hookform/resolvers'],
-          utils: ['date-fns', 'clsx']
-        }
-      }
-    }
+          utils: ['date-fns', 'clsx'],
+        },
+      },
+    },
   },
   test: {
     globals: true,
@@ -47,14 +47,14 @@ export default defineConfig({
         'src/test/setup.ts',
         '**/*.stories.tsx',
         '**/*.config.ts',
-        '**/index.ts'
+        '**/index.ts',
       ],
       thresholds: {
         lines: 80,
         functions: 80,
         branches: 80,
-        statements: 80
-      }
+        statements: 80,
+      },
     },
   },
-})
+});
