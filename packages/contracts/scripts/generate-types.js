@@ -15,7 +15,7 @@ try {
 
   // Generate TypeScript types
   execSync('npx openapi-typescript src/openapi.yaml --output src/generated/types.ts', {
-    stdio: 'inherit'
+    stdio: 'inherit',
   });
 
   console.log('✅ Types generated at packages/contracts/src/generated/types.ts');

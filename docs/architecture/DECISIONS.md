@@ -12,30 +12,30 @@ All ADRs follow the **MADR (Markdown Architectural Decision Records)** format.
 
 ### Core Architecture
 
-* ADR-001: Monorepo Architecture
-* ADR-002: TypeScript Everywhere
-* ADR-003: Contract-First API Development
-* ADR-004: Modular Monolith Backend
+- ADR-001: Monorepo Architecture
+- ADR-002: TypeScript Everywhere
+- ADR-003: Contract-First API Development
+- ADR-004: Modular Monolith Backend
 
 ### Technology Choices
 
-* ADR-005: PostgreSQL with Prisma ORM
-* ADR-006: Redis for Session Management
-* ADR-007: React 18 + Vite + TanStack Query
-* ADR-008: NestJS Backend Framework
+- ADR-005: PostgreSQL with Prisma ORM
+- ADR-006: Redis for Session Management
+- ADR-007: React 18 + Vite + TanStack Query
+- ADR-008: NestJS Backend Framework
 
 ### Security & Operations
 
-* ADR-009: Security by Default
-* ADR-010: Comprehensive Health Checks
-* ADR-011: Docker-Based Development
-* ADR-012: CI/CD with Quality Gates
+- ADR-009: Security by Default
+- ADR-010: Comprehensive Health Checks
+- ADR-011: Docker-Based Development
+- ADR-012: CI/CD with Quality Gates
 
 ### Development Practices
 
-* ADR-013: Testing Strategy
-* ADR-014: Documentation as Code
-* ADR-015: Error Handling Strategy
+- ADR-013: Testing Strategy
+- ADR-014: Documentation as Code
+- ADR-015: Error Handling Strategy
 
 ---
 
@@ -57,23 +57,23 @@ Adopt a **monorepo** using **npm workspaces** with **Turbo** for build orchestra
 
 ### ✅ Positive
 
-* Single clone for all components
-* Immediate propagation of shared types
-* Atomic cross-package commits
-* Unified CI/CD pipeline
-* Consistent tooling and standards
+- Single clone for all components
+- Immediate propagation of shared types
+- Atomic cross-package commits
+- Unified CI/CD pipeline
+- Consistent tooling and standards
 
 ### ⚠️ Negative
 
-* Larger repository size
-* Additional build tooling complexity
-* Learning curve for new contributors
+- Larger repository size
+- Additional build tooling complexity
+- Learning curve for new contributors
 
 ### 💡 Mitigations
 
-* Incremental builds via Turbo
-* Clear workspace boundaries
-* Documented onboarding and repo structure
+- Incremental builds via Turbo
+- Clear workspace boundaries
+- Documented onboarding and repo structure
 
 ## Alternatives Considered
 
@@ -104,27 +104,27 @@ Use **TypeScript across the entire stack** (frontend, backend, shared packages) 
 
 ### ✅ Positive
 
-* Compile-time error detection
-* Strong IDE tooling
-* Safer refactoring
-* Clear, self-documenting interfaces
+- Compile-time error detection
+- Strong IDE tooling
+- Safer refactoring
+- Clear, self-documenting interfaces
 
 ### ⚠️ Negative
 
-* Longer build times
-* Learning curve for some contributors
-* Configuration complexity
+- Longer build times
+- Learning curve for some contributors
+- Configuration complexity
 
 ### 💡 Mitigations
 
-* Incremental builds
-* Shared tsconfig presets
-* Internal TypeScript guidelines
+- Incremental builds
+- Shared tsconfig presets
+- Internal TypeScript guidelines
 
 ## Alternatives Considered
 
-* JavaScript with JSDoc
-* Flow
+- JavaScript with JSDoc
+- Flow
 
 ## Validation
 
@@ -150,26 +150,26 @@ Define APIs **contract-first** using **OpenAPI 3**, generate TypeScript types, a
 
 ### ✅ Positive
 
-* Parallel frontend/backend development
-* Auto-generated documentation
-* Type-safe client/server integration
-* Mock servers for early UI development
+- Parallel frontend/backend development
+- Auto-generated documentation
+- Type-safe client/server integration
+- Mock servers for early UI development
 
 ### ⚠️ Negative
 
-* Upfront API design effort
-* Tooling and process overhead
+- Upfront API design effort
+- Tooling and process overhead
 
 ### 💡 Mitigations
 
-* Iterative contract design
-* Templates for common API patterns
-* Contract validation in CI
+- Iterative contract design
+- Templates for common API patterns
+- Contract validation in CI
 
 ## Alternatives Considered
 
-* Code-first REST
-* GraphQL
+- Code-first REST
+- GraphQL
 
 ## Validation
 
@@ -195,26 +195,26 @@ Build a **modular monolith** using **NestJS**, enforcing clear domain boundaries
 
 ### ✅ Positive
 
-* Simple deployment and debugging
-* Shared transactions
-* Faster iteration
-* Clear future extraction paths
+- Simple deployment and debugging
+- Shared transactions
+- Faster iteration
+- Clear future extraction paths
 
 ### ⚠️ Negative
 
-* Single point of failure
-* Coarse-grained scaling
+- Single point of failure
+- Coarse-grained scaling
 
 ### 💡 Mitigations
 
-* Strict module boundaries
-* Health checks and observability
-* Extraction planning when scale demands it
+- Strict module boundaries
+- Health checks and observability
+- Extraction planning when scale demands it
 
 ## Alternatives Considered
 
-* Microservices
-* Serverless architecture
+- Microservices
+- Serverless architecture
 
 ## Validation
 
@@ -240,25 +240,25 @@ Use **PostgreSQL** with **Prisma ORM** for schema management and data access.
 
 ### ✅ Positive
 
-* Type-safe database queries
-* Automated migrations
-* Excellent developer experience
+- Type-safe database queries
+- Automated migrations
+- Excellent developer experience
 
 ### ⚠️ Negative
 
-* ORM abstraction overhead
-* Prisma-specific patterns
+- ORM abstraction overhead
+- Prisma-specific patterns
 
 ### 💡 Mitigations
 
-* Raw SQL for performance-critical queries
-* Schema and migration reviews
+- Raw SQL for performance-critical queries
+- Schema and migration reviews
 
 ## Alternatives Considered
 
-* TypeORM
-* Knex
-* Raw SQL
+- TypeORM
+- Knex
+- Raw SQL
 
 ## Validation
 
@@ -284,24 +284,24 @@ Use **Redis** for token blacklisting and rate limiting, with an in-memory fallba
 
 ### ✅ Positive
 
-* Proper token invalidation
-* Distributed rate limiting
-* Low-latency access
+- Proper token invalidation
+- Distributed rate limiting
+- Low-latency access
 
 ### ⚠️ Negative
 
-* Additional infrastructure
-* Operational complexity
+- Additional infrastructure
+- Operational complexity
 
 ### 💡 Mitigations
 
-* Graceful degradation
-* Docker-based local setup
+- Graceful degradation
+- Docker-based local setup
 
 ## Alternatives Considered
 
-* Database-backed blacklist
-* Short-lived tokens only
+- Database-backed blacklist
+- Short-lived tokens only
 
 ## Validation
 
@@ -327,25 +327,25 @@ Adopt **React 18**, **Vite**, and **TanStack Query**.
 
 ### ✅ Positive
 
-* Fast development server
-* Modern React features
-* Efficient data fetching and caching
+- Fast development server
+- Modern React features
+- Efficient data fetching and caching
 
 ### ⚠️ Negative
 
-* Learning curve for new patterns
-* Smaller plugin ecosystem than Webpack
+- Learning curve for new patterns
+- Smaller plugin ecosystem than Webpack
 
 ### 💡 Mitigations
 
-* Internal examples and templates
-* Documented frontend conventions
+- Internal examples and templates
+- Documented frontend conventions
 
 ## Alternatives Considered
 
-* Create React App
-* Next.js
-* Remix
+- Create React App
+- Next.js
+- Remix
 
 ## Validation
 
@@ -371,25 +371,25 @@ Use **NestJS** for its modular design, dependency injection, and TypeScript-firs
 
 ### ✅ Positive
 
-* Consistent architecture
-* Testable business logic
-* Built-in enterprise patterns
+- Consistent architecture
+- Testable business logic
+- Built-in enterprise patterns
 
 ### ⚠️ Negative
 
-* Framework learning curve
-* Abstraction overhead
+- Framework learning curve
+- Abstraction overhead
 
 ### 💡 Mitigations
 
-* Shared templates and examples
-* Internal NestJS guidelines
+- Shared templates and examples
+- Internal NestJS guidelines
 
 ## Alternatives Considered
 
-* Express
-* Fastify
-* Hapi
+- Express
+- Fastify
+- Hapi
 
 ## Validation
 
@@ -415,18 +415,18 @@ Apply **secure-by-default practices** including headers, validation, rate limiti
 
 ### ✅ Positive
 
-* Reduced vulnerability surface
-* Compliance readiness
+- Reduced vulnerability surface
+- Compliance readiness
 
 ### ⚠️ Negative
 
-* Configuration overhead
-* Potential false positives
+- Configuration overhead
+- Potential false positives
 
 ### 💡 Mitigations
 
-* CI-based security checks
-* Ongoing tuning
+- CI-based security checks
+- Ongoing tuning
 
 ## Validation
 
@@ -452,16 +452,16 @@ Implement liveness, readiness, and dependency health checks.
 
 ### ✅ Positive
 
-* Faster issue detection
-* Safer deployments
+- Faster issue detection
+- Safer deployments
 
 ### ⚠️ Negative
 
-* Additional endpoints to maintain
+- Additional endpoints to maintain
 
 ### 💡 Mitigations
 
-* Secure and cache health checks
+- Secure and cache health checks
 
 ## Validation
 
@@ -487,18 +487,18 @@ Use **Docker Compose** for development dependencies.
 
 ### ✅ Positive
 
-* Consistent environments
-* Faster onboarding
+- Consistent environments
+- Faster onboarding
 
 ### ⚠️ Negative
 
-* Resource usage
-* Docker learning curve
+- Resource usage
+- Docker learning curve
 
 ### 💡 Mitigations
 
-* Optimized Docker configs
-* Clear setup documentation
+- Optimized Docker configs
+- Clear setup documentation
 
 ## Validation
 
@@ -524,16 +524,16 @@ Use **GitHub Actions** with automated quality gates for validation, testing, and
 
 ### ✅ Positive
 
-* Consistent enforcement
-* Faster, safer releases
+- Consistent enforcement
+- Faster, safer releases
 
 ### ⚠️ Negative
 
-* Pipeline maintenance
+- Pipeline maintenance
 
 ### 💡 Mitigations
 
-* Simple, focused workflows
+- Simple, focused workflows
 
 ## Validation
 
@@ -559,16 +559,16 @@ Adopt a **test pyramid** with unit, integration, and selective E2E testing.
 
 ### ✅ Positive
 
-* Higher confidence in changes
-* Safer refactoring
+- Higher confidence in changes
+- Safer refactoring
 
 ### ⚠️ Negative
 
-* Additional development effort
+- Additional development effort
 
 ### 💡 Mitigations
 
-* Focus on meaningful tests
+- Focus on meaningful tests
 
 ## Validation
 
@@ -594,16 +594,16 @@ Store documentation in-repo and review it like code.
 
 ### ✅ Positive
 
-* Documentation stays current
-* Clear ownership
+- Documentation stays current
+- Clear ownership
 
 ### ⚠️ Negative
 
-* Review overhead
+- Review overhead
 
 ### 💡 Mitigations
 
-* Templates and review standards
+- Templates and review standards
 
 ## Validation
 
@@ -629,16 +629,16 @@ Standardize structured error responses with clear codes and logging.
 
 ### ✅ Positive
 
-* Predictable APIs
-* Easier debugging
+- Predictable APIs
+- Easier debugging
 
 ### ⚠️ Negative
 
-* Additional implementation effort
+- Additional implementation effort
 
 ### 💡 Mitigations
 
-* Shared error utilities
+- Shared error utilities
 
 ## Validation
 
@@ -648,9 +648,9 @@ Structured error handling improves supportability and diagnostics.
 
 ## 🔄 ADR Management
 
-* ADRs are versioned and reviewed like code
-* Status may evolve as constraints change
-* Superseded decisions remain for historical context
+- ADRs are versioned and reviewed like code
+- Status may evolve as constraints change
+- Superseded decisions remain for historical context
 
 ---
 
@@ -658,5 +658,3 @@ Structured error handling improves supportability and diagnostics.
 
 - **Version**: 1.0
 - **Last Updated**: 2026-02-10
-
-

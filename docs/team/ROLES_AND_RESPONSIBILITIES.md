@@ -15,6 +15,7 @@ This document defines the roles, responsibilities, and expectations for all team
 ## 🏗️ Team Structure
 
 ### Core Team Roles
+
 ```
 Team Lead
 ├── Frontend Lead
@@ -29,10 +30,12 @@ Team Lead
 ## 👥 General Roles & Responsibilities
 
 ### Team Lead
+
 **Owns**: Project direction, team health, client communication
 **Metrics**: Team velocity, project completion, stakeholder satisfaction
 **Authority**: Final decision on conflicts, resource allocation
 **Responsibilities**:
+
 - Set project direction and priorities
 - Facilitate team communication
 - Resolve conflicts and blockers
@@ -40,10 +43,12 @@ Team Lead
 - Ensure team health and morale
 
 ### Frontend Lead
+
 **Owns**: UI/UX quality, component library, frontend architecture
 **Metrics**: Lighthouse scores, bundle size, UX metrics
 **Authority**: Frontend tech decisions, design system
 **Responsibilities**:
+
 - Establish frontend architecture
 - Maintain component library
 - Ensure accessibility standards
@@ -51,10 +56,12 @@ Team Lead
 - Mentor frontend developers
 
 ### Backend Lead
+
 **Owns**: API design, database architecture, performance
 **Metrics**: API response time, error rates, test coverage
 **Authority**: Backend tech decisions, API contracts
 **Responsibilities**:
+
 - Design API architecture
 - Database design and optimization
 - Performance monitoring
@@ -62,10 +69,12 @@ Team Lead
 - Mentor backend developers
 
 ### DevOps Lead
+
 **Owns**: CI/CD pipeline, infrastructure, monitoring
 **Metrics**: Deployment frequency, lead time, uptime
 **Authority**: Infrastructure decisions, deployment processes
 **Responsibilities**:
+
 - Maintain CI/CD pipeline
 - Infrastructure management
 - Monitoring and alerting
@@ -73,10 +82,12 @@ Team Lead
 - Disaster recovery
 
 ### Quality Lead
+
 **Owns**: Test coverage, code quality, security compliance
 **Metrics**: Coverage %, bug escape rate, security vulnerabilities
 **Authority**: Quality gates, testing strategy
 **Responsibilities**:
+
 - Define testing strategy
 - Enforce quality standards
 - Security audits
@@ -86,12 +97,15 @@ Team Lead
 # 👔 Detail Role and Responsibilities Definitions
 
 ### Team Lead
+
 **Reports to**: Project Stakeholders  
 **Direct Reports**: All technical leads  
 **Peer Relationships**: Product, Design, Business stakeholders
 
 #### Responsibilities
+
 **Strategic Leadership**
+
 - Define project vision and strategy
 - Set technical direction and priorities
 - Make final decisions on conflicts and trade-offs
@@ -99,6 +113,7 @@ Team Lead
 - Manage project budget and resources
 
 **Team Management**
+
 - Facilitate team communication and collaboration
 - Conduct performance reviews and career planning
 - Resolve conflicts and remove blockers
@@ -106,6 +121,7 @@ Team Lead
 - Recruit and onboard new team members
 
 **Process Management**
+
 - Establish and improve development processes
 - Ensure project delivery on time and quality
 - Manage risk and dependencies
@@ -113,12 +129,14 @@ Team Lead
 - Facilitate retrospectives and improvements
 
 **Technical Leadership**
+
 - Stay current with technology trends
 - Make high-level technical decisions
 - Review critical code and architecture
 - Ensure technical quality and standards
 
 #### Success Metrics
+
 - Team velocity and delivery consistency
 - Stakeholder satisfaction scores
 - Team engagement and retention
@@ -126,6 +144,7 @@ Team Lead
 - Quality metrics (bug rate, coverage)
 
 #### Authority
+
 - Final decision authority when consensus cannot be reached
 - Resource allocation and prioritization
 - Hiring and performance decisions
@@ -133,12 +152,15 @@ Team Lead
 - Process changes approval
 
 ### Frontend Lead
+
 **Reports to**: Team Lead  
 **Direct Reports**: Frontend developers  
 **Peer Relationships**: Backend Lead, Design Lead, Product
 
 #### Responsibilities
+
 **Technical Leadership (40%)**
+
 - Define frontend architecture and standards
 - Establish and maintain component library
 - Make technology decisions (frameworks, tools)
@@ -146,6 +168,7 @@ Team Lead
 - Review critical frontend code and architecture
 
 **Team Development (30%)**
+
 - Mentor frontend developers
 - Conduct code reviews and pair programming
 - Define frontend coding standards
@@ -153,6 +176,7 @@ Team Lead
 - Interview frontend candidates
 
 **Project Delivery (20%)**
+
 - Estimate frontend work complexity
 - Plan and prioritize frontend tasks
 - Ensure frontend quality and testing
@@ -160,12 +184,14 @@ Team Lead
 - Monitor frontend performance metrics
 
 **Innovation (10%)**
+
 - Research new frontend technologies
 - Propose improvements to user experience
 - Experiment with new patterns and tools
 - Share learnings with broader team
 
 #### Success Metrics
+
 - Frontend performance scores (Lighthouse)
 - Component reuse and consistency
 - Frontend test coverage (>85%)
@@ -173,6 +199,7 @@ Team Lead
 - Team satisfaction with frontend tools
 
 #### Authority
+
 - Frontend technology decisions
 - Frontend architecture approval
 - Frontend code review standards
@@ -180,12 +207,15 @@ Team Lead
 - Frontend hiring recommendations
 
 ### Backend Lead
+
 **Reports to**: Team Lead  
 **Direct Reports**: Backend developers  
 **Peer Relationships**: Frontend Lead, DevOps Lead, Product
 
 #### Responsibilities
+
 **Technical Leadership (40%)**
+
 - Define backend architecture and standards
 - Design API contracts and data models
 - Make technology decisions (databases, frameworks)
@@ -193,6 +223,7 @@ Team Lead
 - Review critical backend code and architecture
 
 **Team Development (30%)**
+
 - Mentor backend developers
 - Conduct code reviews and pair programming
 - Define backend coding standards
@@ -200,6 +231,7 @@ Team Lead
 - Interview backend candidates
 
 **System Reliability (20%)**
+
 - Ensure system uptime and reliability
 - Design and implement monitoring
 - Plan for scalability and growth
@@ -207,12 +239,14 @@ Team Lead
 - Manage database design and migrations
 
 **API Design (10%)**
+
 - Design RESTful/GraphQL APIs
 - Ensure API consistency and documentation
 - Coordinate API changes with frontend
 - Monitor API performance and usage
 
 #### Success Metrics
+
 - API response time and reliability
 - System uptime and error rates
 - Backend test coverage (>85%)
@@ -220,6 +254,7 @@ Team Lead
 - Team satisfaction with backend tools
 
 #### Authority
+
 - Backend technology decisions
 - Database and API design
 - Backend architecture approval
@@ -227,12 +262,15 @@ Team Lead
 - Infrastructure decisions (with DevOps)
 
 ### DevOps Lead
+
 **Reports to**: Team Lead  
 **Direct Reports**: Infrastructure engineers (if any)  
 **Peer Relationships**: Backend Lead, Security, Operations
 
 #### Responsibilities
+
 **Infrastructure (40%)**
+
 - Design and maintain cloud infrastructure
 - Implement CI/CD pipelines
 - Manage deployment processes
@@ -240,6 +278,7 @@ Team Lead
 - Monitor system performance and costs
 
 **Developer Experience (30%)**
+
 - Optimize development environment
 - Automate repetitive tasks
 - Provide tools for developers
@@ -247,6 +286,7 @@ Team Lead
 - Document deployment processes
 
 **Reliability & Monitoring (20%)**
+
 - Implement monitoring and alerting
 - Design disaster recovery plans
 - Ensure system availability
@@ -254,6 +294,7 @@ Team Lead
 - Manage backups and recovery
 
 **Security & Compliance (10%)**
+
 - Implement security best practices
 - Ensure compliance with standards
 - Conduct security audits
@@ -261,6 +302,7 @@ Team Lead
 - Stay current with security threats
 
 #### Success Metrics
+
 - Deployment frequency and lead time
 - System uptime and MTTR
 - Infrastructure costs and efficiency
@@ -268,6 +310,7 @@ Team Lead
 - Developer satisfaction with tools
 
 #### Authority
+
 - Infrastructure and deployment decisions
 - CI/CD pipeline configuration
 - Security tooling and practices
@@ -275,12 +318,15 @@ Team Lead
 - Monitoring and alerting setup
 
 ### Quality Lead
+
 **Reports to**: Team Lead  
 **Direct Reports**: QA engineers (if any)  
 **Peer Relationships**: All technical leads, Product
 
 #### Responsibilities
+
 **Quality Strategy (40%)**
+
 - Define testing strategy and standards
 - Establish quality metrics and goals
 - Implement testing frameworks and tools
@@ -288,6 +334,7 @@ Team Lead
 - Review test plans and strategies
 
 **Process Enforcement (30%)**
+
 - Enforce code quality standards
 - Monitor and report quality metrics
 - Conduct code reviews for quality
@@ -295,6 +342,7 @@ Team Lead
 - Facilitate quality ceremonies
 
 **Testing & Validation (20%)**
+
 - Design and review test cases
 - Implement automated testing
 - Coordinate manual testing when needed
@@ -302,6 +350,7 @@ Team Lead
 - Ensure performance and security testing
 
 **Continuous Improvement (10%)**
+
 - Analyze bug trends and root causes
 - Propose process improvements
 - Research new testing tools and methods
@@ -309,6 +358,7 @@ Team Lead
 - Train team on quality practices
 
 #### Success Metrics
+
 - Test coverage percentage
 - Bug escape rate and severity
 - Code review effectiveness
@@ -316,6 +366,7 @@ Team Lead
 - Team adoption of quality practices
 
 #### Authority
+
 - Quality gate definitions
 - Testing strategy approval
 - Code review standards enforcement
@@ -325,11 +376,14 @@ Team Lead
 ## 👨‍💻 Developer Roles
 
 ### Frontend Developer
+
 **Reports to**: Frontend Lead  
 **Levels**: Junior, Mid, Senior
 
 #### Responsibilities
+
 **Development (60%)**
+
 - Implement user interfaces from designs
 - Write clean, maintainable React/TypeScript code
 - Create reusable components
@@ -337,6 +391,7 @@ Team Lead
 - Optimize frontend performance
 
 **Collaboration (20%)**
+
 - Participate in code reviews
 - Pair program with team members
 - Coordinate with backend developers
@@ -344,6 +399,7 @@ Team Lead
 - Share knowledge with team
 
 **Quality (20%)**
+
 - Write unit and integration tests
 - Fix bugs and address issues
 - Update documentation
@@ -351,6 +407,7 @@ Team Lead
 - Participate in retrospectives
 
 #### Success Metrics
+
 - Feature completion and quality
 - Code review feedback
 - Test coverage for own code
@@ -358,11 +415,14 @@ Team Lead
 - Collaboration and teamwork
 
 ### Backend Developer
+
 **Reports to**: Backend Lead  
 **Levels**: Junior, Mid, Senior
 
 #### Responsibilities
+
 **Development (60%)**
+
 - Implement API endpoints and business logic
 - Write clean, maintainable TypeScript code
 - Design database models and queries
@@ -370,6 +430,7 @@ Team Lead
 - Implement security best practices
 
 **Collaboration (20%)**
+
 - Participate in code reviews
 - Pair program with team members
 - Coordinate with frontend developers
@@ -377,6 +438,7 @@ Team Lead
 - Share knowledge with team
 
 **Quality (20%)**
+
 - Write unit and integration tests
 - Fix bugs and address issues
 - Update documentation
@@ -384,6 +446,7 @@ Team Lead
 - Participate in retrospectives
 
 #### Success Metrics
+
 - Feature completion and quality
 - API reliability and performance
 - Test coverage for own code
@@ -391,11 +454,14 @@ Team Lead
 - Collaboration and teamwork
 
 ### Full Stack Developer
+
 **Reports to**: Team Lead or relevant Lead  
 **Levels**: Mid, Senior
 
 #### Responsibilities
+
 **Development (50%)**
+
 - Implement features across frontend and backend
 - Write clean, maintainable code in both areas
 - Ensure seamless integration between layers
@@ -403,6 +469,7 @@ Team Lead
 - Troubleshoot cross-layer issues
 
 **Architecture (30%)**
+
 - Design solutions considering both frontend and backend
 - Ensure consistent patterns across layers
 - Make technology decisions with both perspectives
@@ -410,6 +477,7 @@ Team Lead
 - Mentor developers in both areas
 
 **Collaboration (20%)**
+
 - Bridge communication between frontend and backend teams
 - Facilitate cross-team understanding
 - Share knowledge across disciplines
@@ -417,6 +485,7 @@ Team Lead
 - Participate in both frontend and backend ceremonies
 
 #### Success Metrics
+
 - Cross-layer feature completion
 - Integration quality and reliability
 - Knowledge sharing effectiveness
@@ -426,15 +495,18 @@ Team Lead
 ## 📈 Career Progression
 
 ### Progression Framework
-| Level | Technical Skills | Scope | Influence | Autonomy |
-|-------|------------------|-------|-----------|----------|
-| **Junior** | Learns basics | Individual tasks | Peer level | With guidance |
-| **Mid** | Proficient in area | Features | Within team | With oversight |
-| **Senior** | Expert in area | Complex systems | Across team | Independent |
-| **Lead** | Strategic thinking | Team/area | Organization | Strategic |
+
+| Level      | Technical Skills   | Scope            | Influence    | Autonomy       |
+| ---------- | ------------------ | ---------------- | ------------ | -------------- |
+| **Junior** | Learns basics      | Individual tasks | Peer level   | With guidance  |
+| **Mid**    | Proficient in area | Features         | Within team  | With oversight |
+| **Senior** | Expert in area     | Complex systems  | Across team  | Independent    |
+| **Lead**   | Strategic thinking | Team/area        | Organization | Strategic      |
 
 ### Promotion Criteria
+
 **To Mid Developer**
+
 - Consistently delivers quality features
 - Effective at code reviews
 - Helps peers occasionally
@@ -442,6 +514,7 @@ Team Lead
 - 6+ months at current level
 
 **To Senior Developer**
+
 - Mentors junior developers
 - Improves team processes
 - Handles complex features independently
@@ -449,6 +522,7 @@ Team Lead
 - 1+ years at current level
 
 **To Lead**
+
 - Leads technical area successfully
 - Manages team or project effectively
 - Strategic thinking and planning
@@ -458,18 +532,21 @@ Team Lead
 ## 🔄 Role Transitions
 
 ### Acting in Higher Role
+
 - Temporary assignments for development
 - Clearly defined duration and expectations
 - Support and mentorship provided
 - Consideration for permanent promotion
 
 ### Changing Roles
+
 - Discuss with current and target lead
 - 30-day transition plan
 - Knowledge transfer and training
 - Performance in new role evaluated after 90 days
 
 ### Leaving Role
+
 - 2-week minimum notice for transitions
 - Knowledge documentation required
 - Handover to replacement
@@ -478,6 +555,7 @@ Team Lead
 ## 🎯 Performance Expectations
 
 ### Core Expectations (All Roles)
+
 1. **Technical Excellence**: Quality code and solutions
 2. **Collaboration**: Effective teamwork and communication
 3. **Ownership**: Takes responsibility for work
@@ -485,6 +563,7 @@ Team Lead
 5. **Professionalism**: Reliability and ethical behavior
 
 ### Role-Specific Expectations
+
 - **Leads**: Strategic thinking, team development
 - **Developers**: Technical proficiency, feature delivery
 - **All**: Adherence to processes, documentation
@@ -492,12 +571,14 @@ Team Lead
 ## 📊 Performance Reviews
 
 ### Review Cycle
+
 - **Weekly**: 1:1 with lead (30 min)
 - **Monthly**: Formal check-in (60 min)
 - **Quarterly**: Comprehensive review (90 min)
 - **Annual**: Career progression discussion (120 min)
 
 ### Review Components
+
 1. **Self-assessment**: Reflections on achievements and growth
 2. **Peer feedback**: 360-degree input collected
 3. **Lead assessment**: Evaluation against role expectations
@@ -505,6 +586,7 @@ Team Lead
 5. **Development plan**: Goals and growth opportunities
 
 ### Feedback Guidelines
+
 - Specific and actionable
 - Balanced (strengths and areas to improve)
 - Timely and regular
@@ -514,18 +596,21 @@ Team Lead
 ## 🆘 Support and Development
 
 ### Mentorship Program
+
 - All new hires assigned mentor
 - Regular mentorship meetings
 - Career guidance and planning
 - Technical skill development
 
 ### Training and Development
+
 - 10% time for learning
 - Conference and course budgets
 - Internal training sessions
 - Cross-training opportunities
 
 ### Resources and Support
+
 - Technical leads available for guidance
 - Peer support and collaboration
 - External training resources
@@ -534,6 +619,7 @@ Team Lead
 ## 📝 Role Updates
 
 ### Amendment Process
+
 1. Role changes proposed by team lead
 2. Discussed in team meeting
 3. 2-week review period
@@ -541,8 +627,8 @@ Team Lead
 5. Documentation updated
 
 ### Regular Review
+
 - Roles reviewed annually
 - Market comparison conducted
 - Team feedback incorporated
 - Changes announced transparently
-

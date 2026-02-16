@@ -22,9 +22,9 @@ npm run dev:frontend      # Frontend only
 npm run dev:backend       # Backend only
 ```
 
-* **Frontend**: [http://localhost:5173](http://localhost:5173)
-* **Backend API**: [http://localhost:3000](http://localhost:3000)
-* **API Docs**: [http://localhost:3000/api/docs](http://localhost:3000/api/docs)
+- **Frontend**: [http://localhost:5173](http://localhost:5173)
+- **Backend API**: [http://localhost:3000](http://localhost:3000)
+- **API Docs**: [http://localhost:3000/api/docs](http://localhost:3000/api/docs)
 
 For advanced setup and workflows, continue reading below.
 
@@ -72,9 +72,9 @@ npm run docker:up
 npm run dev
 ```
 
-* Work in small, focused commits
-* Keep your branch up to date with `main`
-* Run tests before pushing changes
+- Work in small, focused commits
+- Keep your branch up to date with `main`
+- Run tests before pushing changes
 
 ### Feature Development Flow
 
@@ -129,9 +129,9 @@ npm run docker:up         # Infrastructure services only
 
 ### Environment Configuration
 
-* Copy `.env.example` files to `.env`
-* Never commit secrets
-* Use different values per environment
+- Copy `.env.example` files to `.env`
+- Never commit secrets
+- Use different values per environment
 
 ---
 
@@ -160,9 +160,9 @@ npm run test --workspace=apps/backend
 
 ### Frontend
 
-* Use React Developer Tools
-* Inspect network requests
-* Check TypeScript errors
+- Use React Developer Tools
+- Inspect network requests
+- Check TypeScript errors
 
 ### Backend
 
@@ -183,10 +183,10 @@ npm run build --workspace=packages/contracts
 
 Dependency types:
 
-* `dependencies`: production code
-* `devDependencies`: development tooling
-* `peerDependencies`: required by consumers
-* `workspace:*`: local packages
+- `dependencies`: production code
+- `devDependencies`: development tooling
+- `peerDependencies`: required by consumers
+- `workspace:*`: local packages
 
 ---
 
@@ -205,11 +205,11 @@ Docker is used **only for local development and infrastructure services**. Produ
 
 ## 🔒 Security Practices
 
-* Never commit secrets
-* Validate all user input
-* Use environment variable validation
-* Keep dependencies up to date
-* Follow the Code of Conduct
+- Never commit secrets
+- Validate all user input
+- Use environment variable validation
+- Keep dependencies up to date
+- Follow the Code of Conduct
 
 ---
 
@@ -223,11 +223,11 @@ npm run type-check
 
 Standards:
 
-* TypeScript strict mode
-* ESLint enforced rules
-* Prettier formatting
-* Clear naming conventions
-* Documentation for public APIs
+- TypeScript strict mode
+- ESLint enforced rules
+- Prettier formatting
+- Clear naming conventions
+- Documentation for public APIs
 
 ---
 
@@ -249,15 +249,15 @@ All Pull Requests must pass CI before merge.
 
 ### Frontend
 
-* Code splitting and lazy loading
-* Memoization where appropriate
-* Avoid unnecessary re-renders
+- Code splitting and lazy loading
+- Memoization where appropriate
+- Avoid unnecessary re-renders
 
 ### Backend
 
-* Efficient database queries
-* Proper indexing
-* Caching for hot paths
+- Efficient database queries
+- Proper indexing
+- Caching for hot paths
 
 ---
 
@@ -271,18 +271,18 @@ npm install
 npm run build
 ```
 
-* Regenerate types if contracts change
-* Restart Docker if services are unreachable
-* Check environment variables
+- Regenerate types if contracts change
+- Restart Docker if services are unreachable
+- Check environment variables
 
 ---
 
 ## 📚 Documentation Guidelines
 
-* Keep docs up to date
-* Use clear headings
-* Include examples
-* Link related documents
+- Keep docs up to date
+- Use clear headings
+- Include examples
+- Link related documents
 
 ---
 
@@ -300,6 +300,5 @@ npm run lint
 
 ## 📅 Version History
 
-* **Version**: 1.0
-* **Last Updated**: 2026-02-10
-
+- **Version**: 1.0
+- **Last Updated**: 2026-02-10
