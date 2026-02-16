@@ -22,5 +22,6 @@
       "@/*": ["src/*"],
       "@contracts": ["../../packages/contracts/src"]
     }
-  }
+  },
+  "exclude": ["node_modules", "dist", "prisma"]
 }

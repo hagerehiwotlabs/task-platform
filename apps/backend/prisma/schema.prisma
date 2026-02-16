@@ -3,12 +3,11 @@
 
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["postgresqlExtensions", "fullTextSearch"]
+  previewFeatures = ["postgresqlExtensions", "fullTextSearchPostgres"]
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
   extensions = [pg_trgm, pgcrypto, btree_gin]
 }
 
@@ -29,7 +28,8 @@ model User {
   // Relations
   projects Project[] @relation("ProjectOwner")
   tasks    Task[]    @relation("TaskAssignee")
-  
+  refreshTokens RefreshToken[]
+
   @@map("users")
   @@index([email])
   @@index([createdAt])
@@ -68,7 +68,7 @@ model Project {
   @@map("projects")
   @@index([ownerId])
   @@index([createdAt])
-  @@index([name], type: Gin) // Full-text search
+  @@index([name]) // simple B‑tree index
 }
 
 // === TASKS ===
@@ -95,7 +95,7 @@ model Task {
   @@index([priority])
   @@index([dueDate])
   @@index([createdAt])
-  @@index([title], type: Gin) // Full-text search
+  @@index([title]) // simple B‑tree index
 }
 
 enum TaskStatus {

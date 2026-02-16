@@ -1,7 +1,7 @@
-# HagereHiwotLabs Task Platform — Onboarding
+# Hagere Hiwot Labs Task Platform — Onboarding
 
 ## 👋 Welcome
-Welcome to the **HagereHiwotLabs Task Platform** 👋  
+Welcome to the **Hagere Hiwot Labs Task Platform** 👋  
 This onboarding guide is your starting point for getting set up, understanding how the project works, and becoming productive quickly.
 
 This document is intentionally high-level. It tells you **where to start**, **what to read next**, and **how to get unstuck**.
@@ -9,7 +9,7 @@ This document is intentionally high-level. It tells you **where to start**, **wh
 ---
 
 ## 🧠 What is this project?
-The HagereHiwotLabs Task Platform is a modern, full-stack task management system built with:
+The Hagere Hiwot Labs Task Platform is a modern, full-stack task management system built with:
 
 - A **monorepo** architecture
 - **TypeScript** across frontend and backend

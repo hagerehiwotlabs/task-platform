@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "🔍 HagereHiwotLabs Task Platform - Verification Script"
+echo "🔍 Hagere Hiwot Labs Task Platform - Verification Script"
 echo "====================================================="
 echo ""
 echo "📁 Directory Structure:"

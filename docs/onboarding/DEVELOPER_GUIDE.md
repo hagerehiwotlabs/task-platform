@@ -1,8 +1,8 @@
-# HagereHiwotLabs Task Platform - Developer Guide
+# Hagere Hiwot Labs Task Platform - Developer Guide
 
 ## 🎯 Introduction
 
-Welcome to the **HagereHiwotLabs Task Platform Developer Guide**.
+Welcome to the **Hagere Hiwot Labs Task Platform Developer Guide**.
 
 This document provides developers with everything needed to work effectively on the project, including architecture overview, development workflows, coding standards, testing practices, and troubleshooting tips. It is intended to be **clear, practical, and safe for public repositories**, while remaining useful for real-world development.
 
@@ -11,7 +11,7 @@ This document provides developers with everything needed to work effectively on 
 ## ⚡ Quick Start (5 Minutes)
 
 ```bash
-git clone https://github.com/HagereHiwotLabs/hagerehiwotlabs-task-platform.git
+git clone https://github.com/Hagere Hiwot Labs/hagerehiwotlabs-task-platform.git
 cd hagerehiwotlabs-task-platform
 npm install
 npm run docker:up

@@ -1,4 +1,4 @@
-# HagereHiwotLabs Task Platform - Setup Guide
+# Hagere Hiwot Labs Task Platform - Setup Guide
 
 ## 🚀 Quick Start (5 Minutes)
 
@@ -15,7 +15,7 @@ docker compose version # Should be 2.x+
 ### One-Command Setup
 ```bash
 # 1. Clone the repository
-git clone https://github.com/HagereHiwotLabs/hagerehiwotlabs-task-platform.git
+git clone https://github.com/Hagere Hiwot Labs/hagerehiwotlabs-task-platform.git
 cd hagerehiwotlabs-task-platform
 
 # 2. Run the setup script
@@ -84,7 +84,7 @@ sudo apt install gh -y
 ### Step 2: Clone Repository
 ```bash
 # Clone with HTTPS 
-git clone https://github.com/HagereHiwotLabs/hagerehiwotlabs-task-platform.git
+git clone https://github.com/Hagere Hiwot Labs/hagerehiwotlabs-task-platform.git
 
 # Navigate to project
 cd hagerehiwotlabs-task-platform

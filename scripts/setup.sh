@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "🚀 Setting up HagereHiwotLabs Task Platform..."
+echo "🚀 Setting up Hagere Hiwot Labs Task Platform..."
 echo "=============================================="
 
 

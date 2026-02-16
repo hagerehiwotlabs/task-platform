@@ -4,6 +4,10 @@ import helmet from 'helmet'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import { AppModule } from './app.module'
+import * as dotenv from 'dotenv';
+import * as path from 'path';
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)

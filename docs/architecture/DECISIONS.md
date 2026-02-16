@@ -1,8 +1,8 @@
-# HagereHiwotLabs Task Platform — Architectural Decision Records (ADRs)
+# Hagere Hiwot Labs Task Platform — Architectural Decision Records (ADRs)
 
 ## ⚡ TL;DR
 
-This document captures the key architectural decisions for the HagereHiwotLabs Task Platform. Decisions prioritize **developer velocity**, **type safety**, **operational simplicity**, and **future scalability**, while avoiding unnecessary complexity. Each decision records context, tradeoffs, alternatives, and validation to keep architecture transparent and evolvable.
+This document captures the key architectural decisions for the Hagere Hiwot Labs Task Platform. Decisions prioritize **developer velocity**, **type safety**, **operational simplicity**, and **future scalability**, while avoiding unnecessary complexity. Each decision records context, tradeoffs, alternatives, and validation to keep architecture transparent and evolvable.
 
 All ADRs follow the **MADR (Markdown Architectural Decision Records)** format.
 
