@@ -12,6 +12,14 @@ import type {
   Error as ApiError
 } from '@hagerehiwotlabs/contracts'
 
+// Define pagination type to avoid using any
+interface Pagination {
+  total: number
+  page: number
+  limit: number
+  pages: number
+}
+
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1'
 
 const api = axios.create({
@@ -86,7 +94,7 @@ export const authAPI = {
 
 export const projectsAPI = {
   getAll: (params?: { page?: number; limit?: number }) => 
-    api.get<{ data: Project[]; pagination: any }>('/projects', { params }),
+    api.get<{ data: Project[]; pagination: Pagination }>('/projects', { params }),
   
   getById: (id: string) => 
     api.get<Project>(`/projects/${id}`),
@@ -103,7 +111,7 @@ export const projectsAPI = {
 
 export const tasksAPI = {
   getProjectTasks: (projectId: string, params?: { status?: string; page?: number; limit?: number }) => 
-    api.get<{ data: Task[]; pagination: any }>(`/projects/${projectId}/tasks`, { params }),
+    api.get<{ data: Task[]; pagination: Pagination }>(`/projects/${projectId}/tasks`, { params }),
   
   create: (projectId: string, data: CreateTaskRequest) => 
     api.post<Task>(`/projects/${projectId}/tasks`, data),
@@ -120,9 +128,18 @@ export const healthAPI = {
   check: () => api.get('/health')
 }
 
-// Error type guard
-export function isApiError(error: any): error is ApiError {
-  return error && typeof error === 'object' && 'error' in error && 'message' in error
+// Error type guard – no `any` used
+export function isApiError(error: unknown): error is ApiError {
+  if (typeof error !== 'object' || error === null) return false
+  
+  const maybeError = error as Record<string, unknown>
+  
+  return (
+    typeof maybeError.error === 'string' &&
+    typeof maybeError.message === 'string' &&
+    (maybeError.code === undefined || typeof maybeError.code === 'string') &&
+    (maybeError.timestamp === undefined || typeof maybeError.timestamp === 'string')
+  )
 }
 
 export default api
