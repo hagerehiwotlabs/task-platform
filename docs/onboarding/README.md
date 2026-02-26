@@ -41,4 +41,5 @@ Onboarding is split into focused documents so you can read only what you need.
 ## 🔗 Related Documentation
 
 - [Setup Guide](./SETUP_GUIDE.md) — Step-by-step instructions to set up your local development environment
-- [Developer Guide](./DEVELOPER_GUIDE.md) — Day-to-day development workflows, coding standards, and contribution guidelines
+- [Backend Developer Guide](../guides/backend-developer.md) — Day-to-day workflows, coding standards, and contribution guidelines for backend developers
+- [Frontend Developer Guide](../guides/frontend-developer.md) — Day-to-day workflows, coding standards, and contribution guidelines for frontend developers
