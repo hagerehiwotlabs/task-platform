@@ -104,35 +104,35 @@ Let's say you're implementing a new endpoint like `GET /projects/:projectId/task
    Then import the types in your code:
 
    ```ts
-   import type { Task } from '@hagerehiwotlabs/contracts'
+   import type { Task } from '@hagerehiwotlabs/contracts';
    ```
 
 3. **Create/update the DTOs** – use `class-validator` to validate incoming data:
 
    ```ts
    // apps/backend/src/modules/tasks/dto/create-task.dto.ts
-   import { IsString, IsOptional, IsEnum, IsUUID } from 'class-validator'
-   import { TaskStatus, TaskPriority } from '@prisma/client'
+   import { IsString, IsOptional, IsEnum, IsUUID } from 'class-validator';
+   import { TaskStatus, TaskPriority } from '@prisma/client';
 
    export class CreateTaskDto {
      @IsString()
-     title: string
+     title: string;
 
      @IsOptional()
      @IsString()
-     description?: string
+     description?: string;
 
      @IsOptional()
      @IsEnum(TaskStatus)
-     status?: TaskStatus
+     status?: TaskStatus;
 
      @IsOptional()
      @IsEnum(TaskPriority)
-     priority?: TaskPriority
+     priority?: TaskPriority;
 
      @IsOptional()
      @IsUUID()
-     assigneeId?: string
+     assigneeId?: string;
    }
    ```
 
@@ -140,11 +140,11 @@ Let's say you're implementing a new endpoint like `GET /projects/:projectId/task
 
    ```ts
    // apps/backend/src/modules/tasks/tasks.controller.ts
-   import { Controller, Get, Post, Body, Param, UseGuards } from '@nestjs/common'
-   import { TasksService } from './tasks.service'
-   import { CreateTaskDto } from './dto/create-task.dto'
-   import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard'
-   import { Task } from '@hagerehiwotlabs/contracts' // type only
+   import { Controller, Get, Post, Body, Param, UseGuards } from '@nestjs/common';
+   import { TasksService } from './tasks.service';
+   import { CreateTaskDto } from './dto/create-task.dto';
+   import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+   import { Task } from '@hagerehiwotlabs/contracts'; // type only
 
    @Controller('projects/:projectId/tasks')
    @UseGuards(JwtAuthGuard)
@@ -156,12 +156,12 @@ Let's say you're implementing a new endpoint like `GET /projects/:projectId/task
        @Param('projectId') projectId: string,
        @Body() dto: CreateTaskDto
      ): Promise<Task> {
-       return this.tasksService.create(projectId, dto)
+       return this.tasksService.create(projectId, dto);
      }
 
      @Get()
      async findAll(@Param('projectId') projectId: string): Promise<Task[]> {
-       return this.tasksService.findAll(projectId)
+       return this.tasksService.findAll(projectId);
      }
    }
    ```
@@ -170,10 +170,10 @@ Let's say you're implementing a new endpoint like `GET /projects/:projectId/task
 
    ```ts
    // apps/backend/src/modules/tasks/tasks.service.ts
-   import { Injectable, NotFoundException } from '@nestjs/common'
-   import { PrismaService } from '../../shared/prisma/prisma.service'
-   import { CreateTaskDto } from './dto/create-task.dto'
-   import { Task } from '@prisma/client'
+   import { Injectable, NotFoundException } from '@nestjs/common';
+   import { PrismaService } from '../../shared/prisma/prisma.service';
+   import { CreateTaskDto } from './dto/create-task.dto';
+   import { Task } from '@prisma/client';
 
    @Injectable()
    export class TasksService {
@@ -182,22 +182,22 @@ Let's say you're implementing a new endpoint like `GET /projects/:projectId/task
      async create(projectId: string, dto: CreateTaskDto): Promise<Task> {
        // verify project exists
        const project = await this.prisma.project.findUnique({
-         where: { id: projectId }
-       })
-       if (!project) throw new NotFoundException('Project not found')
+         where: { id: projectId },
+       });
+       if (!project) throw new NotFoundException('Project not found');
 
        return this.prisma.task.create({
          data: {
            ...dto,
-           projectId
-         }
-       })
+           projectId,
+         },
+       });
      }
 
      async findAll(projectId: string): Promise<Task[]> {
        return this.prisma.task.findMany({
-         where: { projectId }
-       })
+         where: { projectId },
+       });
      }
    }
    ```
@@ -226,12 +226,14 @@ If you need to add a new field or model:
 **Seeding** – the database is seeded with sample data via `prisma/seed.ts`.  
 Run `npm run prisma:seed` if you need to reset the sample data.
 
-**Prisma Studio** – a GUI to browse data:  
+**Prisma Studio** – a GUI to browse data:
+
 ```bash
 npm run prisma:studio --workspace=apps/backend
 ```
 
 > **If `prisma studio` doesn't open**, run:
+>
 > ```bash
 > cd apps/backend
 > npx prisma studio --url "postgresql://postgres:postgres@localhost:5432/hagerehiwotlabs_task"
@@ -245,7 +247,7 @@ In development, if Redis isn't running, the service will log a warning and fall 
 To use Redis in your code, inject the service:
 
 ```ts
-import { RedisService } from '../../shared/redis/redis.service'
+import { RedisService } from '../../shared/redis/redis.service';
 
 @Injectable()
 export class AuthService {
@@ -253,8 +255,8 @@ export class AuthService {
 
   async logout(userId: string, token: string) {
     // Blacklist the token until it expires (e.g., 7 days)
-    const expiresIn = 7 * 24 * 60 * 60 // seconds
-    await this.redis.blacklistToken(token, expiresIn)
+    const expiresIn = 7 * 24 * 60 * 60; // seconds
+    await this.redis.blacklistToken(token, expiresIn);
   }
 }
 ```
@@ -268,13 +270,13 @@ Tests live next to the files they test (`.spec.ts`) or in `test/` for E2E.
 
 ```ts
 // tasks.service.spec.ts
-import { Test } from '@nestjs/testing'
-import { TasksService } from './tasks.service'
-import { PrismaService } from '../../shared/prisma/prisma.service'
+import { Test } from '@nestjs/testing';
+import { TasksService } from './tasks.service';
+import { PrismaService } from '../../shared/prisma/prisma.service';
 
 describe('TasksService', () => {
-  let service: TasksService
-  let prisma: PrismaService
+  let service: TasksService;
+  let prisma: PrismaService;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
@@ -284,57 +286,57 @@ describe('TasksService', () => {
           provide: PrismaService,
           useValue: {
             task: {
-              findMany: jest.fn().mockResolvedValue([])
-            }
-          }
-        }
-      ]
-    }).compile()
+              findMany: jest.fn().mockResolvedValue([]),
+            },
+          },
+        },
+      ],
+    }).compile();
 
-    service = module.get(TasksService)
-    prisma = module.get(PrismaService)
-  })
+    service = module.get(TasksService);
+    prisma = module.get(PrismaService);
+  });
 
   it('should return tasks', async () => {
-    expect(await service.findAll('project-1')).toEqual([])
+    expect(await service.findAll('project-1')).toEqual([]);
     expect(prisma.task.findMany).toHaveBeenCalledWith({
-      where: { projectId: 'project-1' }
-    })
-  })
-})
+      where: { projectId: 'project-1' },
+    });
+  });
+});
 ```
 
 **E2E test example** (in `test/tasks.e2e-spec.ts`):
 
 ```ts
-import * as request from 'supertest'
-import { Test } from '@nestjs/testing'
-import { INestApplication } from '@nestjs/common'
-import { AppModule } from '../src/app.module'
+import * as request from 'supertest';
+import { Test } from '@nestjs/testing';
+import { INestApplication } from '@nestjs/common';
+import { AppModule } from '../src/app.module';
 
 describe('Tasks (e2e)', () => {
-  let app: INestApplication
+  let app: INestApplication;
 
   beforeAll(async () => {
     const moduleFixture = await Test.createTestingModule({
-      imports: [AppModule]
-    }).compile()
+      imports: [AppModule],
+    }).compile();
 
-    app = moduleFixture.createNestApplication()
-    await app.init()
-  })
+    app = moduleFixture.createNestApplication();
+    await app.init();
+  });
 
   it('/projects/:id/tasks (GET)', () => {
     return request(app.getHttpServer())
       .get('/api/v1/projects/123/tasks')
       .expect(200)
-      .expect(res => Array.isArray(res.body))
-  })
+      .expect((res) => Array.isArray(res.body));
+  });
 
   afterAll(async () => {
-    await app.close()
-  })
-})
+    await app.close();
+  });
+});
 ```
 
 **Run tests:**
@@ -367,12 +369,14 @@ git push -u origin feature/add-tasks-endpoint-yourinitials
 ```
 
 On GitHub:
+
 - Create a PR against `develop`.
 - Fill the template (what/why/how, any notes).
 - Request two reviewers.
 - Add labels (`backend`, `needs-review`).
 
 CI will run:
+
 - Lint & type check
 - Tests + coverage
 - Build
@@ -402,9 +406,11 @@ The OpenAPI spec (`packages/contracts/src/openapi.yaml`) is the **single source 
    Follow the existing examples for consistency.
 
 2. **Regenerate types**:
+
    ```bash
    npm run generate:types
    ```
+
    This updates the generated TypeScript types in `packages/contracts/src/generated/` and the main index.
 
 3. **Commit both** – the spec change **and** the generated types.  
@@ -412,7 +418,8 @@ The OpenAPI spec (`packages/contracts/src/openapi.yaml`) is the **single source 
 
 4. **Now frontend can use the new types immediately** (after they pull your changes).
 
-**Important:**  
+**Important:**
+
 - If your change is **backward compatible** (adding a field, new optional parameter), you can just update the spec and regenerate.
 - If it's **breaking** (renaming a field, removing a field, changing a required field), you must:
   - Discuss with the team.
@@ -446,11 +453,13 @@ You can add new variables by updating both `.env.example` and the validation sch
 ## **🎯 6. Common Scenarios**
 
 ### **Q: How do I know if a frontend developer needs an API change?**
+
 - Usually, the issue will be labeled `backend` and `frontend` if both sides are involved.
-- If you're unsure, ask in Telegram.  
+- If you're unsure, ask in Telegram.
 - Always discuss API changes **before** implementing – the contract must be agreed upon.
 
 ### **Q: I need a new database table. What's the process?**
+
 1. Add the model to `prisma/schema.prisma`.
 2. Run a migration: `npm run prisma:migrate --workspace=apps/backend -- --name add_comments_table`.
 3. Update the OpenAPI spec to expose the new resource (if needed).
@@ -458,18 +467,22 @@ You can add new variables by updating both `.env.example` and the validation sch
 5. Implement the service/controller.
 
 ### **Q: How do I test an endpoint without the frontend?**
+
 Use **Postman**, **Insomnia**, or simply **Swagger** (http://localhost:3000/api/docs) – it's interactive and lets you send authenticated requests (just paste a JWT token).
 
 You can also write a quick curl command.
 
 ### **Q: How do I get a JWT token for testing?**
+
 - Use the `/auth/login` endpoint with the seeded test user (`test@hagerehiwotlabs.dev` / `SecurePass123!`).
 - Or implement a test helper that generates tokens (but be careful not to commit secrets).
 
 ### **Q: The frontend team is waiting for an endpoint. Can I provide a mock?**
+
 Yes! The contracts package already has a mock server (Prism). You can run it locally for frontend, but the real endpoint is better. If you're blocked on something else, you can stub the endpoint in the backend (return fake data) temporarily – but mark it clearly.
 
 ### **Q: I need to debug a database query. How?**
+
 - Use `console.log` with the Prisma query (enable logging in Prisma by setting `log: ['query']` in `PrismaService`).
 - Use Prisma Studio (`npm run prisma:studio`) to view data.
 - Connect directly with `psql` or pgAdmin (http://localhost:5050).

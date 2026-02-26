@@ -82,13 +82,13 @@ apps/frontend/src/
 
 ```tsx
 // API types – always from contracts
-import type { Task, CreateTaskRequest } from '@hagerehiwotlabs/contracts'
+import type { Task, CreateTaskRequest } from '@hagerehiwotlabs/contracts';
 
 // UI components – from shared ui package
-import { Button, Input } from '@hagerehiwotlabs/ui'
+import { Button, Input } from '@hagerehiwotlabs/ui';
 
 // Local utilities
-import { formatDate } from '@/lib/utils'
+import { formatDate } from '@/lib/utils';
 ```
 
 ### **E. Use the API Client**
@@ -96,18 +96,18 @@ import { formatDate } from '@/lib/utils'
 We have a pre‑configured Axios client in `src/api/client.ts` with typed methods:
 
 ```tsx
-import { authAPI, projectsAPI, tasksAPI } from '@/api/client'
+import { authAPI, projectsAPI, tasksAPI } from '@/api/client';
 
 // Example: login
 const handleLogin = async (email: string, password: string) => {
   try {
-    const response = await authAPI.login({ email, password })
-    localStorage.setItem('auth_token', response.data.token)
+    const response = await authAPI.login({ email, password });
+    localStorage.setItem('auth_token', response.data.token);
     // user is in response.data.user
   } catch (error) {
     // error is typed (you can use isApiError helper)
   }
-}
+};
 ```
 
 All methods return a typed Promise – full autocompletion.
@@ -120,17 +120,22 @@ You have two options:
    **Solution:** Use the **mock server** from the contracts package.
 
 2. **Start the mock server** (based on OpenAPI):
+
    ```bash
    npm run mock --workspace=packages/contracts
    ```
+
    This runs Prism on http://localhost:4010, serving fake responses defined in the OpenAPI spec.
 
    Then, in your frontend, you can point the API client to the mock:
+
    ```bash
    # In a new terminal, run frontend with env var
    VITE_API_URL=http://localhost:4010 npm run dev --workspace=apps/frontend
    ```
+
    Or simply edit `apps/frontend/.env.local`:
+
    ```
    VITE_API_URL=http://localhost:4010
    ```
@@ -144,23 +149,23 @@ You have two options:
 We use **TanStack Query** for server state. Example:
 
 ```tsx
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { projectsAPI } from '@/api/client'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { projectsAPI } from '@/api/client';
 
 // Fetch projects
 const { data: projects, isLoading } = useQuery({
   queryKey: ['projects'],
-  queryFn: () => projectsAPI.getAll().then(res => res.data)
-})
+  queryFn: () => projectsAPI.getAll().then((res) => res.data),
+});
 
 // Create a project
-const queryClient = useQueryClient()
+const queryClient = useQueryClient();
 const mutation = useMutation({
   mutationFn: projectsAPI.create,
   onSuccess: () => {
-    queryClient.invalidateQueries({ queryKey: ['projects'] })
-  }
-})
+    queryClient.invalidateQueries({ queryKey: ['projects'] });
+  },
+});
 ```
 
 ### **H. Forms with React Hook Form + Zod**
@@ -168,34 +173,43 @@ const mutation = useMutation({
 We use `react-hook-form` with `zod` validation via `@hookform/resolvers`. Example:
 
 ```tsx
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-import { Button, Input } from '@hagerehiwotlabs/ui'
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { Button, Input } from '@hagerehiwotlabs/ui';
 
 const loginSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(8)
-})
+  password: z.string().min(8),
+});
 
-type LoginForm = z.infer<typeof loginSchema>
+type LoginForm = z.infer<typeof loginSchema>;
 
 function LoginPage() {
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginForm>({
-    resolver: zodResolver(loginSchema)
-  })
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginForm>({
+    resolver: zodResolver(loginSchema),
+  });
 
   const onSubmit = (data: LoginForm) => {
     // call API
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Input label="Email" {...register('email')} error={errors.email?.message} />
-      <Input type="password" label="Password" {...register('password')} error={errors.password?.message} />
+      <Input
+        type="password"
+        label="Password"
+        {...register('password')}
+        error={errors.password?.message}
+      />
       <Button type="submit">Login</Button>
     </form>
-  )
+  );
 }
 ```
 
@@ -218,28 +232,29 @@ We use **Vitest** + **React Testing Library**. Tests live next to the component 
 **Example test for a component:**
 
 ```tsx
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { LoginForm } from './LoginForm'
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { LoginForm } from './LoginForm';
 
 describe('LoginForm', () => {
   it('submits email and password', async () => {
-    const onSubmit = vi.fn()
-    render(<LoginForm onSubmit={onSubmit} />)
+    const onSubmit = vi.fn();
+    render(<LoginForm onSubmit={onSubmit} />);
 
-    await userEvent.type(screen.getByLabelText(/email/i), 'test@example.com')
-    await userEvent.type(screen.getByLabelText(/password/i), 'password123')
-    await userEvent.click(screen.getByRole('button', { name: /login/i }))
+    await userEvent.type(screen.getByLabelText(/email/i), 'test@example.com');
+    await userEvent.type(screen.getByLabelText(/password/i), 'password123');
+    await userEvent.click(screen.getByRole('button', { name: /login/i }));
 
     expect(onSubmit).toHaveBeenCalledWith({
       email: 'test@example.com',
-      password: 'password123'
-    })
-  })
-})
+      password: 'password123',
+    });
+  });
+});
 ```
 
 **Run tests:**
+
 ```bash
 npm run test --workspace=apps/frontend        # watch mode
 npm run test:coverage --workspace=apps/frontend  # coverage report
@@ -267,6 +282,7 @@ git push -u origin feature/add-login-form-yourinitials
 ```
 
 Then on GitHub:
+
 - Create a PR against `develop`.
 - Fill the template (what/why/how, screenshots).
 - Request two reviewers.
@@ -305,7 +321,7 @@ The UI package is hot‑reloaded in development, so changes appear immediately i
 - OpenAPI spec is the single source of truth.
 - Types are generated automatically and can be imported anywhere:
   ```ts
-  import type { User, Project, Task } from '@hagerehiwotlabs/contracts'
+  import type { User, Project, Task } from '@hagerehiwotlabs/contracts';
   ```
 - If the API changes (new field, new endpoint), the contracts package must be updated first.  
   **You'll never manually type API responses** – it's all generated.
@@ -319,7 +335,7 @@ Sometimes the backend team needs to change the API. Here's how it affects you:
 1. They update `packages/contracts/src/openapi.yaml` and run `npm run generate:types`.
 2. They commit both the spec change and the generated types.
 3. When you pull the latest `develop`, your `node_modules` will have the new types.
-4. **Your code may now have TypeScript errors** if the API shape changed.  
+4. **Your code may now have TypeScript errors** if the API shape changed.
    - If it's a **breaking change** (e.g., field removed), you'll need to update your code accordingly.
    - If it's a **new field**, you can start using it immediately.
 
@@ -349,28 +365,35 @@ Sometimes the backend team needs to change the API. Here's how it affects you:
 ## **🎯 7. Common Questions**
 
 ### Q: How do I know if an endpoint is ready on the backend?
+
 - Check the issue board – if the backend task is marked "Done", the endpoint should be live.
 - You can also check the Swagger docs at http://localhost:3000/api/docs – endpoints appear there once implemented.
 - If unsure, ask in Telegram.
 
 ### Q: Can I work if the backend isn't ready?
+
 Absolutely! Use the **mock server** (Prism) as described above. You can build the entire UI against mocks, then switch to the real backend later.
 
 ### Q: I need a new API endpoint that's not in the spec. What do I do?
+
 - Discuss with the backend lead and the team.
 - If approved, update the OpenAPI spec yourself (or ask backend to do it) and regenerate types.
 - Then you can use the new types immediately.
 
 ### Q: How do I add a new page?
+
 1. Create a component in `apps/frontend/src/pages/`.
 2. Add a route in `apps/frontend/src/routes/index.tsx`.
 3. Link to it using React Router's `Link`.
 
 ### Q: How do I use environment variables?
+
 Create a `.env.local` file in `apps/frontend/` with `VITE_` prefix. Example:
+
 ```
 VITE_API_URL=http://localhost:4010
 ```
+
 Access in code: `import.meta.env.VITE_API_URL`.
 
 ---
