@@ -314,6 +314,60 @@ paths:
         '404':
           $ref: '#/components/responses/NotFoundError'
 
+  # ===== NEW TASK ENDPOINTS =====
+  /tasks/{taskId}:
+    patch:
+      operationId: updateTask
+      summary: Update a task
+      tags: [Tasks]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: Task identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTaskRequest'
+      responses:
+        '200':
+          description: Task updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+
+    delete:
+      operationId: deleteTask
+      summary: Delete a task
+      tags: [Tasks]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: Task identifier
+      responses:
+        '204':
+          description: Task deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+
 components:
   securitySchemes:
     bearerAuth:
@@ -591,6 +645,35 @@ components:
           format: date-time
           nullable: true
       required: [title]
+
+    # === NEW: Update Task Request ===
+    UpdateTaskRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 200
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        status:
+          type: string
+          enum: [todo, in_progress, done]
+          nullable: true
+        priority:
+          type: string
+          enum: [low, medium, high]
+          nullable: true
+        assigneeId:
+          type: string
+          format: uuid
+          nullable: true
+        dueDate:
+          type: string
+          format: date-time
+          nullable: true
 
     # === RESPONSE SCHEMAS ===
     AuthResponse:
