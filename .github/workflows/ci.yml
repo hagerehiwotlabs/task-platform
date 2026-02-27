@@ -50,10 +50,15 @@ jobs:
       - name: Build all packages
         run: npm run build
 
-      - name: Verify contracts build output
+      # 🔽 ADD THESE DEBUGGING STEPS
+      - name: Debug contracts build
         run: |
-          ls -la packages/contracts/dist/ || echo "❌ contracts/dist not found"
-          cat packages/contracts/package.json | grep -E 'main|types'
+          echo "=== Contracts package.json ==="
+          cat packages/contracts/package.json | grep -E 'main|types|scripts.build'
+          echo "=== Contracts dist folder ==="
+          ls -la packages/contracts/dist/ || echo "❌ dist folder missing"
+          echo "=== Contracts build log (if any) ==="
+          npm run build --workspace=packages/contracts --verbose
 
       - name: Run tests
         run: npm run test:coverage
