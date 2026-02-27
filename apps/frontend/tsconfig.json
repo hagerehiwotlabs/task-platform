@@ -23,7 +23,7 @@
       "@/*": ["src/*"],
       "@contracts": ["../../packages/contracts/src"],
       "@ui": ["../../packages/ui/src"]
-    },
+    }
   },
   "include": ["src", "**/*.test.ts", "**/*.test.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
