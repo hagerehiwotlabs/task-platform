@@ -55,7 +55,7 @@ jobs:
 
       - name: Build remaining packages
         run: npm run build --workspace=apps/backend --workspace=packages/ui --workspace=apps/frontend
-        continue-on-error: true   # allows the job to continue even if frontend fails
+        continue-on-error: true # allows the job to continue even if frontend fails
 
       - name: Debug frontend failure
         if: failure()
