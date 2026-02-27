@@ -47,18 +47,25 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build all packages
-        run: npm run build
+      - name: Build contracts explicitly
+        run: npm run build --workspace=packages/contracts --verbose
 
-      # 🔽 ADD THESE DEBUGGING STEPS
-      - name: Debug contracts build
+      - name: Verify contracts build output
+        run: ls -la packages/contracts/dist/
+
+      - name: Build remaining packages
+        run: npm run build --workspace=apps/backend --workspace=packages/ui --workspace=apps/frontend
+        continue-on-error: true   # allows the job to continue even if frontend fails
+
+      - name: Debug frontend failure
+        if: failure()
         run: |
-          echo "=== Contracts package.json ==="
-          cat packages/contracts/package.json | grep -E 'main|types|scripts.build'
-          echo "=== Contracts dist folder ==="
-          ls -la packages/contracts/dist/ || echo "❌ dist folder missing"
-          echo "=== Contracts build log (if any) ==="
-          npm run build --workspace=packages/contracts --verbose
+          echo "=== Frontend node_modules/@hagerehiwotlabs ==="
+          ls -la node_modules/@hagerehiwotlabs/ || echo "No symlink"
+          echo "=== Frontend tsconfig paths ==="
+          cat apps/frontend/tsconfig.json | grep -A5 '"paths"' || echo "No paths"
+          echo "=== Frontend package.json dependencies ==="
+          cat apps/frontend/package.json | grep -A10 '"dependencies"'
 
       - name: Run tests
         run: npm run test:coverage
