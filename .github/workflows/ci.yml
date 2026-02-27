@@ -50,5 +50,10 @@ jobs:
       - name: Build all packages
         run: npm run build
 
+      - name: Verify contracts build output
+        run: |
+          ls -la packages/contracts/dist/ || echo "❌ contracts/dist not found"
+          cat packages/contracts/package.json | grep -E 'main|types'
+
       - name: Run tests
         run: npm run test:coverage
