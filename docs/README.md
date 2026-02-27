@@ -28,7 +28,7 @@ Welcome to the official documentation for the Hagere Hiwot Labs Task Platform. T
 
 ### Quick Links
 
-- [View source code](https://github.com/Hagere Hiwot Labs/hagerehiwotlabs-task-platform)
+- [View source code](hhttps://github.com/hagerehiwotlabs/task-platform.git)
 - [Team Telegram](https://t.me/hagerehiwotlabs-team)
 
 ---

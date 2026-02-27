@@ -144,6 +144,24 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/tasks/{taskId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    /** Delete a task */
+    delete: operations['deleteTask'];
+    options?: never;
+    head?: never;
+    /** Update a task */
+    patch: operations['updateTask'];
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -297,6 +315,18 @@ export interface components {
        * @enum {string}
        */
       priority: 'low' | 'medium' | 'high';
+      /** Format: uuid */
+      assigneeId?: string | null;
+      /** Format: date-time */
+      dueDate?: string | null;
+    };
+    UpdateTaskRequest: {
+      title?: string | null;
+      description?: string | null;
+      /** @enum {string|null} */
+      status?: 'todo' | 'in_progress' | 'done' | null;
+      /** @enum {string|null} */
+      priority?: 'low' | 'medium' | 'high' | null;
       /** Format: uuid */
       assigneeId?: string | null;
       /** Format: date-time */
@@ -752,6 +782,57 @@ export interface operations {
     responses: {
       /** @description Task created successfully */
       201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['Task'];
+        };
+      };
+      400: components['responses']['ValidationError'];
+      404: components['responses']['NotFoundError'];
+    };
+  };
+  deleteTask: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description Task identifier */
+        taskId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Task deleted successfully */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      404: components['responses']['NotFoundError'];
+    };
+  };
+  updateTask: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description Task identifier */
+        taskId: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['UpdateTaskRequest'];
+      };
+    };
+    responses: {
+      /** @description Task updated successfully */
+      200: {
         headers: {
           [name: string]: unknown;
         };

@@ -17,7 +17,7 @@ docker compose version # Should be 2.x+
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/Hagere Hiwot Labs/hagerehiwotlabs-task-platform.git
+git clone https://github.com/hagerehiwotlabs/task-platform.git
 cd hagerehiwotlabs-task-platform
 
 # 2. Run the setup script
@@ -90,8 +90,8 @@ sudo apt install gh -y
 ### Step 2: Clone Repository
 
 ```bash
-# Clone with HTTPS
-git clone https://github.com/Hagere Hiwot Labs/hagerehiwotlabs-task-platform.git
+# Clone the repo
+git clone https://github.com/hagerehiwotlabs/task-platform.git
 
 # Navigate to project
 cd hagerehiwotlabs-task-platform

@@ -11,7 +11,7 @@ This document provides developers with everything needed to work effectively on 
 ## ⚡ Quick Start (5 Minutes)
 
 ```bash
-git clone https://github.com/Hagere Hiwot Labs/hagerehiwotlabs-task-platform.git
+git clone https://github.com/hagerehiwotlabs/task-platform.git
 cd hagerehiwotlabs-task-platform
 npm install
 npm run docker:up
