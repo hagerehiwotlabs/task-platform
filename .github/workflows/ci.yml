@@ -12,24 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Type check
-        run: npm run type-check
-
-      - name: Lint
-        run: npm run lint
-
-      - name: Format check
-        run: npm run format:check
+      - run: npm ci
+      - run: npm run type-check
+      - run: npm run lint
+      - run: npm run format:check
 
   test:
     name: Test
@@ -37,35 +28,21 @@ jobs:
     needs: validate
     steps:
       - uses: actions/checkout@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
+      - run: npm ci
 
-      - name: Install dependencies
-        run: npm ci
+      # Explicitly build contracts first to guarantee availability
+      - name: Build contracts
+        run: npm run build --workspace=packages/contracts
 
-      - name: Build contracts explicitly
-        run: npm run build --workspace=packages/contracts --verbose
+      # Build everything else (backend, frontend, ui)
+      - name: Build all packages
+        run: npm run build
 
-      - name: Verify contracts build output
-        run: ls -la packages/contracts/dist/
-
-      - name: Build remaining packages
-        run: npm run build --workspace=apps/backend --workspace=packages/ui --workspace=apps/frontend
-        continue-on-error: true # allows the job to continue even if frontend fails
-
-      - name: Debug frontend failure
-        if: failure()
-        run: |
-          echo "=== Frontend node_modules/@hagerehiwotlabs ==="
-          ls -la node_modules/@hagerehiwotlabs/ || echo "No symlink"
-          echo "=== Frontend tsconfig paths ==="
-          cat apps/frontend/tsconfig.json | grep -A5 '"paths"' || echo "No paths"
-          echo "=== Frontend package.json dependencies ==="
-          cat apps/frontend/package.json | grep -A10 '"dependencies"'
-
+      # Run tests with coverage
       - name: Run tests
         run: npm run test:coverage
