@@ -1,0 +1,248 @@
+name: Project Board Automation
+
+on:
+  # When issues are created or moved
+  issues:
+    types: [opened, reopened, closed, assigned]
+
+  # When pull requests are created or updated
+  pull_request:
+    types: [opened, reopened, ready_for_review, closed]
+
+  # When PRs are reviewed
+  pull_request_review:
+    types: [submitted]
+
+  # When branches are created (optional)
+  create:
+    branches: [feature/*, bugfix/*, hotfix/*]
+
+# Permissions needed
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+  projects: write
+
+jobs:
+  automate-project-board:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup GitHub CLI
+        run: |
+          gh auth status || echo "GitHub CLI not authenticated"
+
+      - name: Get Node ID for Issue/PR
+        id: get_node_id
+        run: |
+          if [[ "${{ github.event_name }}" == "issues" ]]; then
+            NODE_ID="${{ github.event.issue.node_id }}"
+            ITEM_TYPE="issue"
+          elif [[ "${{ github.event_name }}" == "pull_request" ]] || [[ "${{ github.event_name }}" == "pull_request_review" ]]; then
+            NODE_ID="${{ github.event.pull_request.node_id }}"
+            ITEM_TYPE="pr"
+          fi
+          echo "node_id=$NODE_ID" >> $GITHUB_OUTPUT
+          echo "item_type=$ITEM_TYPE" >> $GITHUB_OUTPUT
+
+      - name: Add to Project and Set Status
+        if: steps.get_node_id.outputs.node_id != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          PROJECT_ID: 'PVT_kwDOD5SUvM4BQUZI'
+          STATUS_FIELD_ID: 'PVTSSF_lADOD5SUvM4BQUZIzg-eTkM'
+          BACKLOG_OPTION_ID: 'f75ad846'
+          TODO_OPTION_ID: '61e4505c'
+          IN_PROGRESS_OPTION_ID: '47fc9ee4'
+          IN_REVIEW_OPTION_ID: '47fc9ee4'
+          DONE_OPTION_ID: '98236657'
+        run: |
+          # Function to add item to project
+          add_to_project() {
+            local node_id="$1"
+            gh api graphql -f query='
+              mutation($project:ID!, $content:ID!) {
+                addProjectV2ItemById(input: {projectId: $project, contentId: $content}) {
+                  item {
+                    id
+                  }
+                }
+              }' -f project="$PROJECT_ID" -f content="$node_id" --jq '.data.addProjectV2ItemById.item.id'
+          }
+
+          # Function to update item status
+          update_status() {
+            local item_id="$1"
+            local option_id="$2"
+            gh api graphql -f query='
+              mutation($project:ID!, $item:ID!, $field:ID!, $value:String!) {
+                updateProjectV2ItemFieldValue(input: {
+                  projectId: $project
+                  itemId: $item
+                  fieldId: $field
+                  value: { singleSelectOptionId: $value }
+                }) {
+                  projectV2Item {
+                    id
+                  }
+                }
+              }' -f project="$PROJECT_ID" -f item="$item_id" -f field="$STATUS_FIELD_ID" -f value="$option_id"
+          }
+
+          NODE_ID="${{ steps.get_node_id.outputs.node_id }}"
+          ITEM_TYPE="${{ steps.get_node_id.outputs.item_type }}"
+          EVENT_NAME="${{ github.event_name }}"
+          ACTION="${{ github.event.action }}"
+
+          echo "Processing $ITEM_TYPE with action: $ACTION"
+
+          # Determine which column to move to
+          STATUS_OPTION=""
+          REASON=""
+
+          if [[ "$ITEM_TYPE" == "issue" ]]; then
+            # Issue logic
+            if [[ "$ACTION" == "opened" ]]; then
+              STATUS_OPTION="$BACKLOG_OPTION_ID"
+              REASON="New issue created"
+            elif [[ "$ACTION" == "assigned" ]]; then
+              STATUS_OPTION="$IN_PROGRESS_OPTION_ID"
+              REASON="Issue assigned"
+            elif [[ "$ACTION" == "closed" ]]; then
+              # Check if closed by PR merge
+              if [[ "${{ github.event.issue.pull_request }}" != "" ]] && [[ "${{ github.event.issue.state_reason }}" == "completed" ]]; then
+                STATUS_OPTION="$DONE_OPTION_ID"
+                REASON="Issue completed via PR"
+              else
+                STATUS_OPTION="$DONE_OPTION_ID"
+                REASON="Issue closed"
+              fi
+            elif [[ "$ACTION" == "reopened" ]]; then
+              STATUS_OPTION="$TODO_OPTION_ID"
+              REASON="Issue reopened"
+            fi
+          else
+            # Pull Request logic
+            if [[ "$ACTION" == "opened" ]] || [[ "$ACTION" == "reopened" ]] || [[ "$ACTION" == "ready_for_review" ]]; then
+              STATUS_OPTION="$IN_REVIEW_OPTION_ID"
+              REASON="PR opened/ready for review"
+            elif [[ "$ACTION" == "closed" ]]; then
+              if [[ "${{ github.event.pull_request.merged }}" == "true" ]]; then
+                STATUS_OPTION="$DONE_OPTION_ID"
+                REASON="PR merged"
+              else
+                # PR closed without merging - move back to backlog/todo
+                STATUS_OPTION="$BACKLOG_OPTION_ID"
+                REASON="PR closed without merging"
+              fi
+            fi
+
+            # When a review is submitted
+            if [[ "$EVENT_NAME" == "pull_request_review" ]]; then
+              REVIEW_STATE="${{ github.event.review.state }}"
+              if [[ "$REVIEW_STATE" == "approved" ]]; then
+                STATUS_OPTION="$IN_REVIEW_OPTION_ID"
+                REASON="PR approved, still in review"
+              elif [[ "$REVIEW_STATE" == "changes_requested" ]]; then
+                STATUS_OPTION="$IN_PROGRESS_OPTION_ID"
+                REASON="Changes requested, back to work"
+              fi
+            fi
+          fi
+
+          # Add to project and set status
+          if [[ -n "$STATUS_OPTION" ]]; then
+            echo "Moving to status: $REASON"
+            
+            # First, try to find if item already exists in project
+            ITEM_ID=$(gh api graphql -f query='
+              query($project:ID!, $content:ID!) {
+                node(id: $content) {
+                  ... on Issue {
+                    projectItems(first: 1) {
+                      nodes {
+                        id
+                      }
+                    }
+                  }
+                  ... on PullRequest {
+                    projectItems(first: 1) {
+                      nodes {
+                        id
+                      }
+                    }
+                  }
+                }
+              }' -f project="$PROJECT_ID" -f content="$NODE_ID" --jq '.data.node.projectItems.nodes[0].id')
+            
+            if [[ -z "$ITEM_ID" ]] || [[ "$ITEM_ID" == "null" ]]; then
+              # Item not in project, add it
+              echo "Adding new item to project..."
+              ITEM_ID=$(add_to_project "$NODE_ID")
+            fi
+            
+            if [[ -n "$ITEM_ID" ]] && [[ "$ITEM_ID" != "null" ]]; then
+              echo "Updating status..."
+              update_status "$ITEM_ID" "$STATUS_OPTION"
+            fi
+          fi
+
+  link-pr-to-issue:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Link PR to Issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
+        run: |
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          PR_BRANCH="${{ github.event.pull_request.head.ref }}"
+
+          # Extract issue number from branch name (format: feature/description-123)
+          ISSUE_NUMBER=$(echo "$PR_BRANCH" | grep -oE '[0-9]+$')
+
+          if [[ -n "$ISSUE_NUMBER" ]]; then
+            echo "Found issue #$ISSUE_NUMBER in branch name"
+            
+            # Add comment to PR linking the issue
+            gh pr comment "$PR_NUMBER" \
+              --repo "${{ github.repository }}" \
+              --body "🔗 This PR is linked to issue #$ISSUE_NUMBER"
+            
+            # Add PR to issue as linked
+            gh api \
+              --method POST \
+              -H "Accept: application/vnd.github.v3+json" \
+              "/repos/${{ github.repository }}/issues/$ISSUE_NUMBER/comments" \
+              -f "body=📦 PR #$PR_NUMBER has been opened for this issue"
+          fi
+
+  validate-pr-links:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Check if PR has linked issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
+        run: |
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+
+          # Check if PR description contains "Closes #", "Fixes #", etc.
+          PR_BODY="${{ github.event.pull_request.body }}"
+
+          if [[ "$PR_BODY" =~ (close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved)[[:space:]]*#[0-9]+ ]]; then
+            echo "✅ PR has linked issue in description"
+          else
+            # Check branch name for issue number
+            PR_BRANCH="${{ github.event.pull_request.head.ref }}"
+            if [[ "$PR_BRANCH" =~ [0-9]+$ ]]; then
+              echo "✅ PR branch contains issue number"
+            else
+              echo "⚠️ PR does not have a linked issue. Please add 'Closes #123' to description or include issue number in branch name."
+              # Uncomment to fail the check
+              # exit 1
+            fi
+          fi
