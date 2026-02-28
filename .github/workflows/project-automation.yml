@@ -227,7 +227,6 @@ jobs:
           PR_DATA=$(gh api repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }})
           PR_BODY=$(echo "$PR_DATA" | jq -r '.body')
           PR_BRANCH=$(echo "$PR_DATA" | jq -r '.head.ref')
-  
           if echo "$PR_BODY" | grep -qE '(close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved) #[0-9]+'; then
             echo "✅ PR has linked issue in description"
           elif echo "$PR_BRANCH" | grep -qE '[0-9]+$'; then
