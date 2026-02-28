@@ -197,17 +197,14 @@ jobs:
           PR_BRANCH="${{ github.event.pull_request.head.ref }}"
 
           # Extract issue number from branch name (format: feature/description-123)
-          ISSUE_NUMBER=$(echo "$PR_BRANCH" | grep -oE '[0-9]+$')
+          # The '|| true' prevents script exit when grep finds nothing
+          ISSUE_NUMBER=$(echo "$PR_BRANCH" | grep -oE '[0-9]+$' || true)
 
           if [[ -n "$ISSUE_NUMBER" ]]; then
             echo "Found issue #$ISSUE_NUMBER in branch name"
-            
-            # Add comment to PR linking the issue
             gh pr comment "$PR_NUMBER" \
               --repo "${{ github.repository }}" \
               --body "🔗 This PR is linked to issue #$ISSUE_NUMBER"
-            
-            # Add PR to issue as linked
             gh api \
               --method POST \
               -H "Accept: application/vnd.github.v3+json" \
