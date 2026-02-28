@@ -154,7 +154,7 @@ jobs:
             
             # First, try to find if item already exists in project
             ITEM_ID=$(gh api graphql -f query='
-              query($project:ID!, $content:ID!) {
+              query($content:ID!) {
                 node(id: $content) {
                   ... on Issue {
                     projectItems(first: 1) {
@@ -171,7 +171,7 @@ jobs:
                     }
                   }
                 }
-              }' -f project="$PROJECT_ID" -f content="$NODE_ID" --jq '.data.node.projectItems.nodes[0].id')
+              }' -f content="$NODE_ID" --jq '.data.node.projectItems.nodes[0].id')
             
             if [[ -z "$ITEM_ID" ]] || [[ "$ITEM_ID" == "null" ]]; then
               # Item not in project, add it
@@ -223,21 +223,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
         run: |
-          PR_NUMBER="${{ github.event.pull_request.number }}"
-
-          # Check if PR description contains "Closes #", "Fixes #", etc.
-          PR_BODY="${{ github.event.pull_request.body }}"
-
-          if [[ "$PR_BODY" =~ (close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved)[[:space:]]*#[0-9]+ ]]; then
+          # Fetch PR details via GitHub API to avoid shell interpolation issues
+          PR_DATA=$(gh api repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }})
+          PR_BODY=$(echo "$PR_DATA" | jq -r '.body')
+          PR_BRANCH=$(echo "$PR_DATA" | jq -r '.head.ref')
+  
+          if echo "$PR_BODY" | grep -qE '(close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved) #[0-9]+'; then
             echo "✅ PR has linked issue in description"
+          elif echo "$PR_BRANCH" | grep -qE '[0-9]+$'; then
+            echo "✅ PR branch contains issue number"
           else
-            # Check branch name for issue number
-            PR_BRANCH="${{ github.event.pull_request.head.ref }}"
-            if [[ "$PR_BRANCH" =~ [0-9]+$ ]]; then
-              echo "✅ PR branch contains issue number"
-            else
-              echo "⚠️ PR does not have a linked issue. Please add 'Closes #123' to description or include issue number in branch name."
-              # Uncomment to fail the check
-              # exit 1
-            fi
+            echo "⚠️ PR does not have a linked issue. Please add 'Closes #123' to description or include issue number in branch name."
+            # exit 1
           fi
