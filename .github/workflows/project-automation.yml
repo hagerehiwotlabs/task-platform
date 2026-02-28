@@ -22,7 +22,6 @@ permissions:
   contents: read
   issues: write
   pull-requests: write
-  project: write
 
 jobs:
   automate-project-board:
